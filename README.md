@@ -1,25 +1,25 @@
 # Host Pro
 
-**Host Pro** is a modern, efficient, and user-friendly project designed to streamline hosting services and improve web performance. This repository includes all the source code and assets required to run the project seamlessly.
+Host Pro is a modern and efficient web hosting platform designed to offer fast, scalable, and customizable hosting solutions. The application aims to provide a user-friendly interface for users managing their hosting services.
 
 ## Features
 
 - **Fast and Reliable**: Optimized for performance.
-- **Scalable**: Built to handle growth and increasing demands.
+- **Scalable**: Built to handle increasing demands.
 - **User-Friendly**: Intuitive interface for ease of use.
-- **Customizable**: Easily adaptable to various hosting needs.
+- **Customizable**: Adapts to various hosting needs.
+- **Form Handling**: Built with [React Hook Form](https://react-hook-form.com) for efficient form management.
+- **Charts**: Integrated with [Recharts](https://recharts.org) for visualizing data.
 
 ## Getting Started
 
-Follow these instructions to set up and run the project locally.
-
 ### Prerequisites
 
-Ensure you have the following installed on your system:
+Ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (version 14 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- A modern web browser (e.g., Chrome, Firefox, or Edge)
+- Node.js (version 14 or higher)
+- npm or yarn
+- A modern web browser (e.g., Chrome, Firefox, Edge)
 
 ### Installation
 
@@ -27,12 +27,10 @@ Ensure you have the following installed on your system:
    ```bash
    git clone https://github.com/farhad-ahmadi-04/Host-pro.git
    ```
-
 2. Navigate to the project directory:
    ```bash
    cd Host-pro
    ```
-
 3. Install dependencies:
    ```bash
    npm install
@@ -48,8 +46,7 @@ Ensure you have the following installed on your system:
    # or
    yarn dev
    ```
-
-2. Open your web browser and navigate to:
+2. Open your browser and go to:
    ```
    http://localhost:5173
    ```
@@ -66,15 +63,15 @@ The build files will be generated in the `dist` directory.
 
 ## Technologies Used
 
-- **React**: For building the user interface.
-- **Vite**: For fast and efficient development.
-- **React Query**: For data fetching and caching.
-- **Redux**: For state management.
-- **Node.js**: Backend integration.
+- React
+- Vite
+- React Query
+- Redux
+- React Hook Form
+- Recharts
+- Node.js
 
 ## Contributing
-
-Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch:
@@ -93,15 +90,14 @@ Contributions are welcome! Please follow these steps:
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+MIT License.
 
 ## Contact
 
-For any questions or feedback, feel free to reach out:
-
+For questions or feedback:
 - GitHub: [farhad-ahmadi-04](https://github.com/farhad-ahmadi-04)
 - Email: farhad.13ahmadi.83l@gmail.com
 
----
+Happy coding!
 
-Happy coding! 🎉
+Let me know if you need any more adjustments!
