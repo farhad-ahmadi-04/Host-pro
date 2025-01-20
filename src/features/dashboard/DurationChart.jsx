@@ -17,7 +17,7 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
+  grid-column: span 2; /* Half row */
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -25,6 +25,13 @@ const ChartBox = styled.div`
 
   & .recharts-pie-label-text {
     font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    grid-column: span 2; /* Full row to stack vertically */
+  }
+  @media (max-width: 480px) {
+    grid-column: span 1; /* Stack all items vertically */
   }
 `;
 

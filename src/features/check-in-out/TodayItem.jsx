@@ -18,10 +18,21 @@ const StyledTodayItem = styled.li`
   &:first-child {
     border-top: 1px solid var(--color-grey-100);
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
 `;
 
 const Guest = styled.div`
   font-weight: 500;
+`;
+
+const UserName = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 `;
 
 export default function TodayItem({ activity }) {
@@ -34,6 +45,7 @@ export default function TodayItem({ activity }) {
 
       <Flag src={guests.countryFlag} alt={`Flag of ${guests.countryFlag}`} />
       <Guest>{guests.fullName}</Guest>
+
       <div>{numNights} nights</div>
 
       {status === "unconfirmed" && (

@@ -14,12 +14,19 @@ import {
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 
 const StyledSalesChart = styled(DashboardBox)`
-  grid-column: 1 / -1;
+  grid-column: span 4; /* Full row */
 
   /* Hack to change grid line colors */
   & .recharts-cartesian-grid-horizontal line,
   & .recharts-cartesian-grid-vertical line {
     stroke: var(--color-grey-300);
+  }
+
+  @media (max-width: 768px) {
+    grid-column: span 2; /* Full row in 2-column layout */
+  }
+  @media (max-width: 480px) {
+    grid-column: span 1; /* Stack all items vertically */
   }
 `;
 

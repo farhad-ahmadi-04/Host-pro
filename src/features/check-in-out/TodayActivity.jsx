@@ -13,11 +13,16 @@ const StyledToday = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 3.2rem;
-  display: flex;
-  flex-direction: column;
+  grid-column: span 2; /* Half row */
   gap: 2.4rem;
-  grid-column: 1 / span 2;
   padding-top: 2.4rem;
+
+  @media (max-width: 768px) {
+    grid-column: span 2; /* Full row to stack vertically */
+  }
+  @media (max-width: 480px) {
+    grid-column: span 1; /* Stack all items vertically */
+  }
 `;
 
 const TodayList = styled.ul`
