@@ -60,38 +60,68 @@ const StyleNavLink = styled(NavLink)`
   }
 `;
 
-export default function MainNav() {
+export default function MainNav({ isShow }) {
   return (
     <nav>
       <NavList>
         <li>
           <StyleNavLink to={"dashboard"}>
             <HiOutlineHome />
-            <span>Dashboard</span>
+            <span
+              style={{
+                display: isShow && "block",
+              }}
+            >
+              Dashboard
+            </span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"bookings"}>
             <HiOutlineCalendarDays />
-            <span>bookings</span>
+            <span
+              style={{
+                display: isShow && "block",
+              }}
+            >
+              bookings
+            </span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"cabins"}>
             <HiOutlineHomeModern />
-            <span>Cabins</span>
+            <span
+              style={{
+                display: isShow && "block",
+              }}
+            >
+              Cabins
+            </span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"users"}>
             <HiOutlineUser />
-            <span>Users</span>
+            <span
+              style={{
+                display: isShow && "block",
+              }}
+            >
+              Users
+            </span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"settings"}>
             <HiOutlineCog6Tooth />
-            <span>Setting</span>
+            <span
+              style={{
+                display: isShow && "block",
+              }}
+            >
+              Setting
+            </span>
           </StyleNavLink>
         </li>
       </NavList>

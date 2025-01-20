@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 import Logo from "./Logo";
 import MainNav from "./MainNav";
-import { HiOutlineChevronDoubleLeft, HiOutlineXMark } from "react-icons/hi2";
+import { HiOutlineXMark } from "react-icons/hi2";
 import Uploader from "../data/Uploader";
 import Heading from "./Heading";
-import { useRef } from "react";
 
 const StyleSidebar = styled.aside`
   grid-area: sidebar;
@@ -44,7 +43,6 @@ const StyleSidebar = styled.aside`
     bottom: 0;
     overflow-x: hidden; /* Disable horizontal scroll */
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   }
 `;
@@ -56,17 +54,10 @@ const StyleSideHeader = styled.div`
   gap: 1.2rem;
   margin-top: 1rem;
   color: var(--color-grey-500);
+  z-index: 99;
 
   > h2 {
     display: none;
-  }
-  > svg {
-    transform: rotate(180deg);
-    transition: all 0.3s ease;
-  }
-
-  .hideSide {
-    font-size: 20px;
   }
 
   .close {
@@ -74,13 +65,9 @@ const StyleSideHeader = styled.div`
   }
 
   @media (max-width: 800px) {
-    .hideSide {
-      display: none;
-    }
     .close {
       display: block;
       font-size: 20px;
-      cursor: pointer;
     }
     h2 {
       display: block;
@@ -93,8 +80,9 @@ export default function Sidebar({ isShow, setIsShow }) {
     <StyleSidebar
       style={{
         display: isShow && "flex",
-        width: isShow && " fit-content",
-        padding: isShow && "10px 10px",
+        width: isShow && "fit-content",
+        padding: isShow && "10px 28px",
+        zIndex: isShow && "99",
         transition: "width 0.5s ease-in-out",
       }}
     >
@@ -102,7 +90,7 @@ export default function Sidebar({ isShow, setIsShow }) {
         <Heading as={"h2"}>Host Pro</Heading>
         <HiOutlineXMark className="close" onClick={() => setIsShow(false)} />
       </StyleSideHeader>
-      <MainNav />
+      <MainNav isShow={isShow} />
 
       {/* <Uploader /> */}
     </StyleSidebar>

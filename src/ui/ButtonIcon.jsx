@@ -15,6 +15,11 @@ const ButtonIcon = styled.button`
     width: 2.2rem;
     height: 2.2rem;
     color: var(--color-brand-600);
+
+    @media (max-width: 800px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
 
