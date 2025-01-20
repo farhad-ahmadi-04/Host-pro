@@ -24,6 +24,10 @@ const Box = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
   padding: 2.4rem 4rem;
+
+  @media (max-width: 800px) {
+    padding: 2.4rem 2rem;
+  }
 `;
 
 function CheckinBooking() {
@@ -82,8 +86,8 @@ function CheckinBooking() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Check in booking #{bookingId}</Heading>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+        <Heading as="h1">Check in booking #{bookingId}</Heading>
       </Row>
 
       <BookingDataBox booking={booking} />
@@ -126,7 +130,7 @@ function CheckinBooking() {
         <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckin}>
           Check in booking #{bookingId}
         </Button>
-        <Button variation="secondary" onClick={moveBack}>
+        <Button variations="secondary" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>
