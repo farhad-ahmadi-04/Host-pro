@@ -11,7 +11,7 @@ import { DarkModeProvider } from "./context/DarkModeContext";
 import SpinnerFullPage from "./ui/SpinnerFullPage";
 
 // import Dashboard from "./pages/Dashboard";
-const Dashboard = lazy(() => import("./pages/dashboard"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Cabins = lazy(() => import("./pages/Cabins"));
 const Users = lazy(() => import("./pages/Users"));
 const Settings = lazy(() => import("./pages/Settings"));
