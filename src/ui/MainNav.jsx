@@ -11,7 +11,19 @@ const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  overflow: hidden;
+  list-style: none;
+
+  @media (max-width: 800px) {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+    overflow-x: scroll;
+    grid-template-columns: repeat(auto-fill, 1fr);
+  }
+  @media (max-width: 300px) {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  }
 `;
 
 const StyleNavLink = styled(NavLink)`
@@ -20,7 +32,7 @@ const StyleNavLink = styled(NavLink)`
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    overflow: hidden;
+    /* overflow: hidden; */
     color: var(--color-grey-600);
     font-size: 1.6rem;
     font-weight: 500;
@@ -41,11 +53,8 @@ const StyleNavLink = styled(NavLink)`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
+    flex-shrink: 0;
     color: var(--color-grey-400);
-  }
-  & span {
-    transition: all 0.3s;
-    display: none;
   }
 
   &:hover svg,
@@ -58,70 +67,50 @@ const StyleNavLink = styled(NavLink)`
   &.active:visited span {
     color: var(--color-brand-600);
   }
+
+  @media (max-width: 800px) {
+    span {
+      display: none;
+    }
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 `;
 
-export default function MainNav({ isShow }) {
+export default function MainNav() {
   return (
     <nav>
       <NavList>
         <li>
           <StyleNavLink to={"dashboard"}>
             <HiOutlineHome />
-            <span
-              style={{
-                display: isShow && "block",
-              }}
-            >
-              Dashboard
-            </span>
+            <span>Dashboard</span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"bookings"}>
             <HiOutlineCalendarDays />
-            <span
-              style={{
-                display: isShow && "block",
-              }}
-            >
-              bookings
-            </span>
+            <span>bookings</span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"cabins"}>
             <HiOutlineHomeModern />
-            <span
-              style={{
-                display: isShow && "block",
-              }}
-            >
-              Cabins
-            </span>
+            <span>Cabins</span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"users"}>
             <HiOutlineUser />
-            <span
-              style={{
-                display: isShow && "block",
-              }}
-            >
-              Users
-            </span>
+            <span>Users</span>
           </StyleNavLink>
         </li>
         <li>
           <StyleNavLink to={"settings"}>
             <HiOutlineCog6Tooth />
-            <span
-              style={{
-                display: isShow && "block",
-              }}
-            >
-              Setting
-            </span>
+            <span>Setting</span>
           </StyleNavLink>
         </li>
       </NavList>

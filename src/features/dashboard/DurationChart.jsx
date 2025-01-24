@@ -18,6 +18,7 @@ const ChartBox = styled.div`
 
   padding: 2.4rem 3.2rem;
   grid-column: span 2; /* Half row */
+  overflow-x: scroll;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -32,6 +33,7 @@ const ChartBox = styled.div`
   }
   @media (max-width: 480px) {
     grid-column: span 1; /* Stack all items vertically */
+    overflow-x: scroll;
   }
 `;
 
@@ -156,7 +158,7 @@ export default function DurationChart({ confirmedStays }) {
   return (
     <ChartBox>
       <Heading as={"h2"}>Stay duration summary</Heading>
-      <ResponsiveContainer width={"100%"} height={240}>
+      <ResponsiveContainer width={"100%"} height={240} minWidth={"340px"}>
         <PieChart>
           <Pie
             data={data}
@@ -183,7 +185,7 @@ export default function DurationChart({ confirmedStays }) {
             width={"30%"}
             layout="vertical"
             iconSize={15}
-            iconType="circle"
+            iconType="line"
           />
         </PieChart>
       </ResponsiveContainer>

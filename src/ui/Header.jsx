@@ -13,15 +13,9 @@ const StyleHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: end;
-  > :first-of-type {
-    display: none;
-  }
 
   @media (max-width: 800px) {
-    justify-content: space-between;
-    > :first-of-type {
-      display: block;
-    }
+    padding: 1.2rem 1.8rem;
   }
 `;
 
@@ -31,14 +25,9 @@ const StyledNavMenu = styled.div`
   align-items: center;
 `;
 
-export default function Header({ setIsShow }) {
+export default function Header() {
   return (
     <StyleHeader>
-      <div>
-        <ButtonIcon className="show" onClick={() => setIsShow(true)}>
-          <HiBars3BottomLeft />
-        </ButtonIcon>
-      </div>
       <StyledNavMenu>
         <UserAvatar />
         <HeaderMenu />

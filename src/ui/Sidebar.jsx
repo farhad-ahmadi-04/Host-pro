@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 import Logo from "./Logo";
 import MainNav from "./MainNav";
-import { HiOutlineXMark } from "react-icons/hi2";
 import Uploader from "../data/Uploader";
 import Heading from "./Heading";
+import { useEffect, useRef, useState } from "react";
+import { HiMiniChevronDoubleLeft } from "react-icons/hi2";
 
 const StyleSidebar = styled.aside`
   grid-area: sidebar;
   background-color: var(--color-grey-0);
   padding: 3.2rem 1.4rem;
   border-right: 1px solid var(--color-grey-100);
-  width: 55px;
+
   position: sticky;
   top: 0;
   /* grid-row: 1 / -1; */
@@ -19,31 +20,28 @@ const StyleSidebar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  transition: width 0.3s ease;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 
-  &:hover {
-    width: fit-content;
+  .rotated {
+    transform: rotate(180deg);
+  }
 
-    span {
-      display: block;
-    }
-
+  &.active {
+    width: 50px;
     h2 {
-      display: block;
+      display: none;
     }
   }
 
   @media (max-width: 800px) {
-    padding: 0;
-    width: 0; /* 0 width - change this with click */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    top: unset;
     bottom: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    overflow-y: auto;
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    padding: 0 1.8rem;
+    z-index: 99;
   }
 `;
 
@@ -54,43 +52,60 @@ const StyleSideHeader = styled.div`
   gap: 1.2rem;
   margin-top: 1rem;
   color: var(--color-grey-500);
-  z-index: 99;
-
-  > h2 {
-    display: none;
-  }
+  max-width: 100%;
 
   .close {
-    display: none;
+    cursor: pointer;
+    font-size: 2rem;
+    flex-grow: 0;
+    transition: all 0.3s ease;
+    height: fit-content;
   }
 
   @media (max-width: 800px) {
-    .close {
-      display: block;
-      font-size: 20px;
-    }
-    h2 {
-      display: block;
-    }
+    display: none;
   }
 `;
 
-export default function Sidebar({ isShow, setIsShow }) {
+export default function Sidebar() {
+  const [isActive, setIsActive] = useState(false);
+  const sidebarRef = useRef(null);
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    if (isActive) {
+      sidebarRef.current.classList.add("active");
+      closeRef.current.firstElementChild.classList.add("rotated");
+    } else {
+      sidebarRef.current.classList.remove("active");
+      closeRef.current.firstElementChild.classList.remove("rotated");
+    }
+
+    function handleResize() {
+      if (window.innerWidth <= 800) {
+        sidebarRef.current.classList.remove("active");
+        closeRef.current.firstElementChild.classList.remove("rotated");
+        setIsActive(false);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isActive]);
+
+  function handleSideBar() {
+    setIsActive(!isActive);
+  }
+
   return (
-    <StyleSidebar
-      style={{
-        display: isShow && "flex",
-        width: isShow && "fit-content",
-        padding: isShow && "10px 28px",
-        zIndex: isShow && "99",
-        transition: "width 0.5s ease-in-out",
-      }}
-    >
+    <StyleSidebar className="sidebar" ref={sidebarRef}>
       <StyleSideHeader>
         <Heading as={"h2"}>Host Pro</Heading>
-        <HiOutlineXMark className="close" onClick={() => setIsShow(false)} />
+        <div ref={closeRef} onClick={() => handleSideBar()}>
+          <HiMiniChevronDoubleLeft className="close" />
+        </div>
       </StyleSideHeader>
-      <MainNav isShow={isShow} />
+      <MainNav />
 
       {/* <Uploader /> */}
     </StyleSidebar>

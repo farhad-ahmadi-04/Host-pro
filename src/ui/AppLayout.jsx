@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 
 const StyleAppLayout = styled.div`
   display: grid;
@@ -18,7 +17,8 @@ const StyleAppLayout = styled.div`
   @media (max-width: 800px) {
     grid-template-areas:
       "header"
-      "main";
+      "main"
+      "sidebar";
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
 
@@ -35,6 +35,10 @@ const Main = styled.main`
   padding: 4rem 4.8rem 6.4rem;
   grid-area: main;
   overflow-y: auto;
+
+  @media (max-width: 800px) {
+    padding: 1.2rem 1.8rem;
+  }
 `;
 
 const Container = styled.div`
@@ -46,23 +50,10 @@ const Container = styled.div`
 `;
 
 export default function AppLayout() {
-  const [isShow, setIsShow] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsShow(false);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <StyleAppLayout>
-      <Header setIsShow={setIsShow} />
-      <Sidebar setIsShow={setIsShow} isShow={isShow} />
+      <Header />
+      <Sidebar />
       <Main>
         <Container>
           <Outlet />

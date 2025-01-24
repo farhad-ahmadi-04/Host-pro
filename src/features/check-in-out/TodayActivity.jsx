@@ -16,6 +16,7 @@ const StyledToday = styled.div`
   grid-column: span 2; /* Half row */
   gap: 2.4rem;
   padding-top: 2.4rem;
+  overflow-x: scroll;
 
   @media (max-width: 768px) {
     grid-column: span 2; /* Full row to stack vertically */
@@ -27,7 +28,7 @@ const StyledToday = styled.div`
 
 const TodayList = styled.ul`
   overflow: scroll;
-  overflow-x: hidden;
+  overflow-x: scroll;
 
   /* Removing scrollbars for webkit, firefox, and ms, respectively */
   &::-webkit-scrollbar {
