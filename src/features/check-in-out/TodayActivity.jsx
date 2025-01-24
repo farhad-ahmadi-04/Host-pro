@@ -16,7 +16,7 @@ const StyledToday = styled.div`
   grid-column: span 2; /* Half row */
   gap: 2.4rem;
   padding-top: 2.4rem;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   @media (max-width: 768px) {
     grid-column: span 2; /* Full row to stack vertically */
