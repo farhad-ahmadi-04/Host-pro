@@ -1,6 +1,8 @@
-function Header() {
+import React from "react";
+
+function Header({ children }: { children: React.ReactNode }) {
     return (
-        <header className="header">header</header>
+        <header className="w-full">{children}</header>
     );
 }
 
