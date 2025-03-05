@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "../button"
-import { MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
 
 // This type is used to define the shape of our data.
@@ -36,31 +36,67 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         accessorKey: "name",
-        header: "Cabin",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant={"ghost"}
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Cabin
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "maxCapacity",
-        header: "Capacity",
         cell: ({ row }) => {
             const capacity = row.original.maxCapacity;
             return (
                 <span>Fits up to {capacity} guests</span>
             );
         },
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant={"ghost"}
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Capacity
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "regularPrice",
-        header: "Price",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant={"ghost"}
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Price
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         cell: ({ row }) => {
             const price = row.original.regularPrice;
             return (
                 formatCurrency(price)
             );
-        }
+        },
     },
     {
         accessorKey: "discount",
-        header: "Discount",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant={"ghost"}
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Discount
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         cell: ({ row }) => {
             const discount = row.original.discount;
             return (
