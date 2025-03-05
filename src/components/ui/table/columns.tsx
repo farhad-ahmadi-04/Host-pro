@@ -2,33 +2,76 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "../button"
 import { MoreHorizontal } from "lucide-react"
+import { formatCurrency } from "@/lib/utils"
 
 // This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type Payment = {
-    id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
+    id: number
+    description: string
+    created_at: string
+    regularPrice: number
+    image: string
+    discount: number
+    maxCapacity: number
+    name: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
     {
-        accessorKey: "status",
-        header: "Status",
+        accessorKey: "image",
+        header: "image",
+
+        cell: ({ row }) => {
+            const imageUrl = row.original.image;
+            return (
+                <img
+                    src={imageUrl}
+                    alt="Cabin image"
+                    width={100}
+                    height={100}
+                    className="rounded-md object-cover"
+                />
+            );
+        },
     },
     {
-        accessorKey: "email",
-        header: "Email",
+        accessorKey: "name",
+        header: "Cabin",
     },
     {
-        accessorKey: "amount",
-        header: "Amount",
+        accessorKey: "maxCapacity",
+        header: "Capacity",
+        cell: ({ row }) => {
+            const capacity = row.original.maxCapacity;
+            return (
+                <span>Fits up to {capacity} guests</span>
+            );
+        },
+    },
+    {
+        accessorKey: "regularPrice",
+        header: "Price",
+        cell: ({ row }) => {
+            const price = row.original.regularPrice;
+            return (
+                formatCurrency(price)
+            );
+        }
+    },
+    {
+        accessorKey: "discount",
+        header: "Discount",
+        cell: ({ row }) => {
+            const discount = row.original.discount;
+            return (
+                formatCurrency(discount)
+            );
+        }
     },
     {
         id: "actions",
         cell: ({ row }) => {
-            const payment = row.original
+            const id = row.original.id
 
             return (
                 <DropdownMenu>
@@ -41,7 +84,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuContent align="end">
                         {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
                         <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
+                            onClick={() => navigator.clipboard.writeText(id.toString())}
                         >
                             Duplicate
                         </DropdownMenuItem>
