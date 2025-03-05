@@ -7,18 +7,18 @@ function LoadingCabins({ headNum, rowNum }: { headNum: number, rowNum: number })
             <TableCaption>Loading...</TableCaption>
             <TableHeader>
                 <TableRow>
-                    {Array.from({ length: headNum }, () =>
-                        <TableHead>
+                    {Array.from({ length: headNum }, (_, index) =>
+                        <TableHead key={index}>
                             <Skeleton className="h-7" />
                         </TableHead>)}
 
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {Array.from({ length: rowNum }, () =>
-                    <TableRow>
-                        {Array.from({ length: headNum }, () =>
-                            <TableCell>
+                {Array.from({ length: rowNum }, (_, index) =>
+                    <TableRow key={index}>
+                        {Array.from({ length: headNum }, (_, index) =>
+                            <TableCell key={index}>
                                 <Skeleton className="h-7" />
                             </TableCell>)}
                     </TableRow>
