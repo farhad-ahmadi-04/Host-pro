@@ -9,11 +9,11 @@ function AppLayout() {
         <>
             <SidebarProvider>
                 <AppSidebar />
-                <div className="w-full h-svh overflow-hidden">
+                <div className="w-full">
                     <Header>
                         <SidebarTrigger />
                     </Header>
-                    <main className="p-2 md:p-5 w-full flex justify-center items-center overflow-y-auto">
+                    <main className="p-2 md:p-5 w-full flex justify-center items-center overflow-auto">
                         {/* container */}
                         <Outlet />
                     </main>
