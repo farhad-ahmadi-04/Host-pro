@@ -1,8 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "../button"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 // This type is used to define the shape of our data.
 export type Payment = {

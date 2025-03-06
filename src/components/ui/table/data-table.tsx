@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -8,7 +9,6 @@ import {
     SortingState,
     useReactTable,
 } from "@tanstack/react-table"
-
 import {
     Table,
     TableBody,
@@ -17,11 +17,15 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table/table"
-import { useState } from "react"
-import { Input } from "../input"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../dropdown-menu"
-import { Button } from "../button"
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
 import { ArrowDown } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
