@@ -30,11 +30,13 @@ import { Button } from "@/components/ui/button"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    columnName: string
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    columnName
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
@@ -62,11 +64,12 @@ export function DataTable<TData, TValue>({
             <div className="flex items-center py-4">
                 {/* add filter on cabin name */}
                 <Input
-                    placeholder="Filter cabin..."
-                    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+                    placeholder={`Filter ${columnName}...`}
+                    value={(table.getColumn(columnName)?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         // filter on cabin names columns
-                        table.getColumn("name")?.setFilterValue(event.target.value)
+                        table.getColumn(columnName)?.setFilterValue(event.target.value)
+
                     }
                     className="max-w-sm"
                 />
