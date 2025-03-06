@@ -1,5 +1,17 @@
+import Section from "@/components/ui/section";
+import BookingTable from "@/features/bookings/bookingTable";
+
 function Bookings() {
-    return (<h1>Bookings</h1>);
+    return (
+        <Section>
+            <div>
+                <h1 className="text-lg md:text-2xl lg:text-4xl font-semibold">All bookings</h1>
+            </div>
+            <div>
+                <BookingTable />
+            </div>
+        </Section>
+    );
 }
 
 export default Bookings;

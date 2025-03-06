@@ -1,7 +1,7 @@
-import { columns } from "@/features/cabinColumns";
+import { columns } from "@/features/cabins/cabinColumns";
 import { DataTable } from "@/components/ui/table/data-table";
-import useCabins from "@/features/useCabins";
-import LoadingCabins from "@/features/loadingCabins";
+import useCabins from "@/features/cabins/useCabins";
+import LoadingCabins from "@/features/cabins/loadingCabins";
 
 function CabinTable() {
     const { cabins, error, isLoading } = useCabins()
