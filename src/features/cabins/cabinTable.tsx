@@ -1,4 +1,4 @@
-import { columns } from "@/features/cabins/cabinColumns";
+import { cabinColumns } from "@/features/cabins/cabinColumns";
 import { DataTable } from "@/components/ui/table/data-table";
 import useCabins from "@/features/cabins/useCabins";
 import LoadingCabins from "@/features/cabins/loadingCabins";
@@ -9,8 +9,7 @@ function CabinTable() {
     if (isLoading) return <LoadingCabins headNum={5} rowNum={10} />
 
     return (
-        <DataTable columns={columns} data={cabins ?? []} />
+        <DataTable columns={cabinColumns} data={cabins ?? []} columnName="name" />
     );
 }
-
 export default CabinTable;

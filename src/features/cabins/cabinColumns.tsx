@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/button"
 // This type is used to define the shape of our data.
 export type Payment = {
     id: number
-    description: string
-    created_at: string
     regularPrice: number
     image: string
     discount: number
@@ -16,7 +14,7 @@ export type Payment = {
     name: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const cabinColumns: ColumnDef<Payment>[] = [
     {
         accessorKey: "image",
         header: "image",
