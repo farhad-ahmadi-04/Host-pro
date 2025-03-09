@@ -27,6 +27,7 @@ import { ArrowDown } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import PaginationLayout from "../PaginationLayout"
+import Filter from "../filter"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -60,11 +61,14 @@ export function DataTable<TData, TValue>({
             columnFilters,
             columnVisibility
         }
-    })
+    });
+    // getting the current page 
+    const page = window.location.pathname.split('/')[1]
+
 
     return (
         <div>
-            <div className="flex items-center py-4">
+            <div className="flex justify-between items-center py-4">
                 {/* add filter on cabin name */}
                 <Input
                     placeholder={`Filter ${columnName}...`}
@@ -76,36 +80,52 @@ export function DataTable<TData, TValue>({
                     }
                     className="max-w-sm"
                 />
-                {/* adding column visibility */}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Columns
-                            <ArrowDown />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        {table
-                            .getAllColumns()
-                            .filter(
-                                (column) => column.getCanHide()
-                            )
-                            .map((column) => {
-                                return (
-                                    <DropdownMenuCheckboxItem
-                                        key={column.id}
-                                        className="capitalize"
-                                        checked={column.getIsVisible()}
-                                        onCheckedChange={(value) =>
-                                            column.toggleVisibility(!!value)
-                                        }
-                                    >
-                                        {column.id}
-                                    </DropdownMenuCheckboxItem>
+
+                <div className="flex gap-1">
+                    {/* filter */}
+                    {page === "bookings" &&
+                        <Filter
+                            filterField="status"
+                            options={[
+                                { value: "all", label: "All" },
+                                { value: "checked-out", label: "Checked out" },
+                                { value: "checked-in", label: "Checked in" },
+                                { value: "unconfirmed", label: "Unconfirmed" },
+                            ]}
+                        />}
+
+                    {/* adding column visibility */}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" className="ml-auto">
+                                Columns
+                                <ArrowDown />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            {table
+                                .getAllColumns()
+                                .filter(
+                                    (column) => column.getCanHide()
                                 )
-                            })}
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                                .map((column) => {
+                                    return (
+                                        <DropdownMenuCheckboxItem
+                                            key={column.id}
+                                            className="capitalize"
+                                            checked={column.getIsVisible()}
+                                            onCheckedChange={(value) =>
+                                                column.toggleVisibility(!!value)
+                                            }
+                                        >
+                                            {column.id}
+                                        </DropdownMenuCheckboxItem>
+                                    )
+                                })}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                </div>
             </div>
 
 
@@ -152,7 +172,7 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
-                <div className="bg-sidebar">
+                <div className="bg-sidebar hover:bg-muted/50">
                     <PaginationLayout count={count} />
                 </div>
             </div>
