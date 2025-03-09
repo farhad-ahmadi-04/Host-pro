@@ -8,17 +8,19 @@ function AppLayout() {
     return (
         <>
             <SidebarProvider>
+
                 <AppSidebar />
                 <div className="w-full">
                     <Header>
                         <SidebarTrigger />
                     </Header>
-                    <main className="p-2 md:p-5 w-full flex justify-center items-center overflow-auto">
+                    <main className="p-2 md:p-5 w-full flex justify-center items-center">
                         {/* container */}
                         <Outlet />
                     </main>
 
                 </div>
+
             </SidebarProvider>
         </>
     );
