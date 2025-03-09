@@ -9,7 +9,11 @@ function BookingTable() {
     if (isLoading) return <LoadingCabins headNum={5} rowNum={10} />
 
     return (
-        <DataTable count={count ?? 0} columns={bookingsColumns} data={bookings ?? []} columnName="email" />
+        <DataTable
+            count={count ?? 0}
+            columns={bookingsColumns}
+            data={bookings ?? []}
+            columnName="email" />
     );
 }
 

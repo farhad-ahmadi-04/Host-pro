@@ -9,7 +9,11 @@ function CabinTable() {
     if (isLoading) return <LoadingCabins headNum={5} rowNum={10} />
 
     return (
-        <DataTable count={count ?? 0} columns={cabinColumns} data={cabins ?? []} columnName="name" />
+        <DataTable
+            count={count ?? 0}
+            columns={cabinColumns}
+            data={cabins ?? []}
+            columnName="name" />
     );
 }
 export default CabinTable;
