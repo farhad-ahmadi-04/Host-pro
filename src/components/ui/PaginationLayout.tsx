@@ -42,7 +42,7 @@ function PaginationLayout({ count }: { count: number }) {
                 <PaginationItem>
                     <PaginationPrevious onClick={perPage} disabled={currentPage === 1} />
                 </PaginationItem>
-                {currentPage !== 1 && <PaginationItem>
+                {currentPage > 2 && <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem>}
                 {currentPage !== 1 && <PaginationItem>
@@ -54,7 +54,7 @@ function PaginationLayout({ count }: { count: number }) {
                 {currentPage < pageCount && <PaginationItem>
                     <PaginationLink onClick={() => targetPage(currentPage + 1)}>{currentPage + 1}</PaginationLink>
                 </PaginationItem>}
-                {currentPage !== pageCount && <PaginationItem>
+                {currentPage < pageCount - 1 && <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem>}
                 <PaginationItem>
