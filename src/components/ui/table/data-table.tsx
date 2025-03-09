@@ -26,16 +26,19 @@ import {
 import { ArrowDown } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import PaginationLayout from "../PaginationLayout"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     columnName: string
+    count: number
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    count,
     columnName
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
@@ -149,6 +152,9 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
+                <div className="bg-sidebar">
+                    <PaginationLayout count={count} />
+                </div>
             </div>
         </div>
     )
