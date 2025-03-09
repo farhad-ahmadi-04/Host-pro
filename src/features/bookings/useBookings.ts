@@ -7,6 +7,13 @@ export const useBookings = () => {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
+  // filter
+  const filterValue = searchParams.get("status");
+  const filter =
+    !filterValue || filterValue === "all"
+      ? null
+      : { field: "status", value: filterValue };
+
   // page
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
@@ -15,8 +22,8 @@ export const useBookings = () => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["bookings", page],
-    queryFn: () => getBookings({ page }),
+    queryKey: ["bookings", page, filter],
+    queryFn: () => getBookings({ page, filter }),
   });
 
   // pre-fetching
@@ -24,14 +31,14 @@ export const useBookings = () => {
 
   if (pageCount > page)
     queryClient.prefetchQuery({
-      queryKey: ["bookings", page + 1],
-      queryFn: () => getBookings({ page: page + 1 }),
+      queryKey: ["bookings", page + 1, filter],
+      queryFn: () => getBookings({ filter, page: page + 1 }),
     });
 
   if (pageCount > 1)
     queryClient.prefetchQuery({
-      queryKey: ["bookings", page - 1],
-      queryFn: () => getBookings({ page: page - 1 }),
+      queryKey: ["bookings", page - 1, filter],
+      queryFn: () => getBookings({ filter, page: page - 1 }),
     });
 
   return { bookings, isLoading, error, count };
