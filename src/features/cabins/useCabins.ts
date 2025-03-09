@@ -1,5 +1,6 @@
 import { getCabins } from "@/services/apiCabins";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 /**
  * Custom hook for fetching cabin data.
@@ -15,15 +16,20 @@ import { useQuery } from "@tanstack/react-query";
  *   - isLoading: A boolean flag indicating whether the data is in the loading state.
  */
 const useCabins = () => {
+  const [searchParams] = useSearchParams();
+
+  // page
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   const {
-    data: cabins,
+    data: { data: cabins, count } = {},
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["cabins"],
-    queryFn: getCabins,
+    queryKey: ["cabins", page],
+    queryFn: () => getCabins({ page }),
   });
-  return { cabins, error, isLoading };
+  return { cabins, error, isLoading, count };
 };
 
 export default useCabins;
