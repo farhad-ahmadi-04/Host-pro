@@ -28,6 +28,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import PaginationLayout from "../PaginationLayout"
 import Filter from "../filter"
+import { bookingsFilter, cabinsFilter } from "@/content/filter"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -86,12 +87,12 @@ export function DataTable<TData, TValue>({
                     {page === "bookings" &&
                         <Filter
                             filterField="status"
-                            options={[
-                                { value: "all", label: "All" },
-                                { value: "checked-out", label: "Checked out" },
-                                { value: "checked-in", label: "Checked in" },
-                                { value: "unconfirmed", label: "Unconfirmed" },
-                            ]}
+                            options={bookingsFilter}
+                        />}
+                    {page === "cabins" &&
+                        <Filter
+                            filterField="status"
+                            options={cabinsFilter}
                         />}
 
                     {/* adding column visibility */}
