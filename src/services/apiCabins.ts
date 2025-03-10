@@ -1,10 +1,22 @@
 import { PAGE_SIZE } from "@/lib/utils";
 import supabase from "./supabase";
 
-export const getCabins = async ({ page }: { page: number }) => {
+interface getCabinsProps {
+  page: number;
+  filter: { field: string; value: string } | null;
+}
+
+export const getCabins = async ({ page, filter }: getCabinsProps) => {
   // get data from cabins
   let query = supabase.from("cabins").select("*", { count: "exact" });
 
+  // filter
+  if (filter) {
+    if (filter.value === "with-discount") query = query.gt(filter.field, "0");
+    if (filter.value === "no-discount") query = query.eq(filter.field, "0");
+  }
+
+  // pagination
   if (page) {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
