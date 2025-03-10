@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import PaginationLayout from "../PaginationLayout"
 import Filter from "../filter"
-import { bookingsFilter, cabinsFilter } from "@/content/filter"
+import { bookingsFilter, cabinsFilter } from "@/config/filter"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]

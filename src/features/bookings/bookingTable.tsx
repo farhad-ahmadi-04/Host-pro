@@ -1,12 +1,12 @@
 import { DataTable } from "@/components/ui/table/data-table";
-import LoadingCabins from "../cabins/loadingCabins";
 import { useBookings } from "./useBookings";
 import { bookingsColumns } from "@/features/bookings/bookingsColumns";
+import LoadingBookings from "./loadingBookings";
 
 function BookingTable() {
     const { bookings, isLoading, error, count } = useBookings()
     if (error) return <p>{error.message}</p>
-    if (isLoading) return <LoadingCabins headNum={5} rowNum={10} />
+    if (isLoading) return <LoadingBookings headNum={6} rowNum={5} />
 
     return (
         <DataTable

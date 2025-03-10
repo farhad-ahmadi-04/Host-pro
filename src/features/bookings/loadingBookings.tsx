@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table/table";
 
-function LoadingCabins({ headNum, rowNum }: { headNum: number, rowNum: number }) {
+function LoadingBookings({ headNum, rowNum }: { headNum: number, rowNum: number }) {
     return (
         <div>
             {/* title + filters */}
@@ -26,6 +26,7 @@ function LoadingCabins({ headNum, rowNum }: { headNum: number, rowNum: number })
                 </div>
             </div>
 
+            {/* table */}
             <Table className="w-full border">
                 <TableCaption>Loading...</TableCaption>
                 <TableHeader>
@@ -53,4 +54,4 @@ function LoadingCabins({ headNum, rowNum }: { headNum: number, rowNum: number })
     );
 }
 
-export default LoadingCabins;
+export default LoadingBookings;

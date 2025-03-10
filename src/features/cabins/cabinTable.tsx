@@ -6,7 +6,7 @@ import LoadingCabins from "@/features/cabins/loadingCabins";
 function CabinTable() {
     const { cabins, error, isLoading, count } = useCabins()
     if (error) return <p>{error.message}</p>
-    if (isLoading) return <LoadingCabins headNum={5} rowNum={10} />
+    if (isLoading) return <LoadingCabins headNum={5} rowNum={5} />
 
     return (
         <DataTable
