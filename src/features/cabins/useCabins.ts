@@ -20,6 +20,13 @@ const useCabins = () => {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
+  // filter
+  const filterVAlue = searchParams.get("status");
+  const filter =
+    !filterVAlue || filterVAlue === "all"
+      ? null
+      : { field: "discount", value: filterVAlue };
+
   // page
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
@@ -28,8 +35,8 @@ const useCabins = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["cabins", page],
-    queryFn: () => getCabins({ page }),
+    queryKey: ["cabins", page, filter],
+    queryFn: () => getCabins({ page, filter }),
   });
 
   // pre-fetching
@@ -37,14 +44,14 @@ const useCabins = () => {
 
   if (pageCount > page)
     queryClient.prefetchQuery({
-      queryKey: ["cabins", page + 1],
-      queryFn: () => getCabins({ page: page + 1 }),
+      queryKey: ["cabins", page + 1, filter],
+      queryFn: () => getCabins({ page: page + 1, filter }),
     });
 
   if (pageCount > 1)
     queryClient.prefetchQuery({
-      queryKey: ["cabins", page - 1],
-      queryFn: () => getCabins({ page: page - 1 }),
+      queryKey: ["cabins", page - 1, filter],
+      queryFn: () => getCabins({ page: page - 1, filter }),
     });
 
   return { cabins, error, isLoading, count };
