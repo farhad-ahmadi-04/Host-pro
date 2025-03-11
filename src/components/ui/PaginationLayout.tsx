@@ -27,8 +27,6 @@ function PaginationLayout({ count }: { count: number }) {
 
         searchParams.set('page', next.toString())
         setSearchParams(searchParams)
-        console.log(next);
-
     }
 
     function targetPage(value: number) {
