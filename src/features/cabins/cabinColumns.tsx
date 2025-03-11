@@ -1,8 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import CabinAction from "./cabinAction"
 
 // This type is used to define the shape of our data.
 export type Payment = {
@@ -108,25 +108,7 @@ export const cabinColumns: ColumnDef<Payment>[] = [
             const id = row.original.id
 
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(id.toString())}
-                        >
-                            Duplicate
-                        </DropdownMenuItem>
-                        {/* <DropdownMenuSeparator /> */}
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <CabinAction id={id} />
             )
         },
     },
