@@ -33,3 +33,12 @@ export const getCabins = async ({ page, filter }: getCabinsProps) => {
   // return data and error
   return { data, error, count };
 };
+
+// delete cabin row
+export const deleteCabinApi = async (id: number) => {
+  const { error, data } = await supabase.from("cabins").delete().eq("id", id);
+
+  if (error) throw new Error("Cabins could not be deleted");
+
+  return data;
+};
