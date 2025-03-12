@@ -105,10 +105,8 @@ export const cabinColumns: ColumnDef<Payment>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            const id = row.original.id
-
             return (
-                <CabinAction id={id} />
+                <CabinAction cabin={row.original} />
             )
         },
     },
