@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
 import { Payment } from "./cabinColumns";
+import CreateCabinForm from "./createCabinForm";
 
 
 function EditCabinAction({
@@ -21,27 +21,11 @@ function EditCabinAction({
             <DialogTrigger>
             </DialogTrigger>
             {/* content */}
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle>Edit cabin</DialogTitle>
-                    <DialogDescription>
-                        Are you sure you want to Edit this cabin permanently? This action cannot be undone.
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
-                        <Button variant={"outline"}>Cancel</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                        <Button
-                            variant={"destructive"}
-                            onClick={() => console.log(cabin)}>
-
-                            Edit
-                        </Button>
-                    </DialogClose>
-
-                </DialogFooter>
+            <DialogContent className="sm:max-w-md max-h-9/12 overflow-y-auto">
+                <DialogTitle>Edit cabin</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+                <CreateCabinForm cabin={cabin} />
             </DialogContent>
         </Dialog>
     );
