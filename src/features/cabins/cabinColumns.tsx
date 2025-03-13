@@ -23,7 +23,7 @@ export const cabinColumns: ColumnDef<Payment>[] = [
             const imageUrl = row.original.image;
             return (
                 <img
-                    src={imageUrl}
+                    src={imageUrl.toString()}
                     alt="Cabin image"
                     width={100}
                     height={100}
