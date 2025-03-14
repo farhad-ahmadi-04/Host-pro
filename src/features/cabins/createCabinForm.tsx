@@ -7,6 +7,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Textarea } from "@/components/ui/textarea";
 import useEditCabin from "./useEditCabin";
+import useCreateCabin from "./useCreateCabin";
 
 export interface ISubmit {
     name: string
@@ -82,9 +83,10 @@ const formSchema = z.object({
  *
  * @returns The JSX element representing the cabin creation/edit form.
  */
-function CreateCabinForm({ cabin }: { cabin: Payment }) {
-    const { id: editId, ...editValue } = cabin
+function CreateCabinForm({ cabin, onClose }: { cabin?: Payment, onClose?: () => void }) {
+    const { id: editId, ...editValue } = cabin ?? {} as Payment;
     const { editCabin, isEditing } = useEditCabin()
+    const { createCabin, isCreating } = useCreateCabin()
     const isEditSession = Boolean(editId)
 
 
@@ -109,9 +111,18 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                 {
                     onSuccess: () => {
                         form.reset();
+                        onClose?.();
                     },
                 }
             );
+        } else {
+            createCabin({
+                ...data,
+                image,
+
+            }, {
+                onSuccess: () => form.reset()
+            })
         }
     }
 
@@ -129,6 +140,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                             <FormControl>
                                 <Input
                                     placeholder="Cabin name"
+                                    disabled={isEditing || isCreating}
                                     {...field}
                                 />
                             </FormControl>
@@ -145,6 +157,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                             <FormLabel className="md:text-nowrap">Maximum capacity</FormLabel>
                             <FormControl>
                                 <Input
+                                    disabled={isEditing || isCreating}
                                     type="number"
                                     placeholder="Maximum capacity"
                                     {...field}
@@ -163,6 +176,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                             <FormLabel className="md:text-nowrap">Regular price</FormLabel>
                             <FormControl>
                                 <Input
+                                    disabled={isEditing || isCreating}
                                     type="number"
                                     placeholder="Regular price"
                                     {...field}
@@ -181,6 +195,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                             <FormLabel className="md:text-nowrap">Discount</FormLabel>
                             <FormControl>
                                 <Input
+                                    disabled={isEditing || isCreating}
                                     type="number"
                                     placeholder="Discount"
                                     {...field}
@@ -199,6 +214,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                             <FormLabel className="md:text-nowrap">Description for website</FormLabel>
                             <FormControl>
                                 <Textarea
+                                    disabled={isEditing || isCreating}
                                     placeholder="description"
                                     {...field} />
                             </FormControl>
@@ -217,6 +233,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                                 <FormLabel className="md:text-nowrap">Cabin photo</FormLabel>
                                 <FormControl>
                                     <Input
+                                        disabled={isEditing || isCreating}
                                         type="file"
                                         accept="image/*"
                                         onChange={(e) => {
@@ -232,8 +249,13 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                         );
                     }}
                 />
-                <Button type="submit" disabled={isEditing}>Edit cabin</Button>
-                <Button type="button" variant={"secondary"}>Cancel</Button>
+                <div className="flex flex-col justify-between items-center gap-2">
+                    <Button type="submit" disabled={isEditing || isCreating} className="w-full">
+                        {isEditSession ? "Edit cabin" : "Create cabin"}
+                    </Button>
+                    <Button type="button" disabled={isEditing || isCreating} variant={"secondary"} className="w-full"
+                        onClick={() => onClose?.()}>Cancel</Button>
+                </div>
             </form>
         </Form>
     );
