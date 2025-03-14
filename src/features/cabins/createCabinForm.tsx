@@ -6,6 +6,16 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Textarea } from "@/components/ui/textarea";
+import useEditCabin from "./useEditCabin";
+
+export interface ISubmit {
+    name: string
+    maxCapacity: number
+    regularPrice: number
+    discount: number
+    description: string
+    image?: File
+}
 
 // set type of form fields by zod
 const formSchema = z.object({
@@ -50,26 +60,59 @@ const formSchema = z.object({
 });
 
 
+/**
+ * Renders a form for creating or editing a cabin.
+ *
+ * This component initializes a form with default values based on the provided cabin data.
+ * If the cabin has an `id`, the form is pre-populated for editing (except for the image field, which is reset),
+ * otherwise it is configured for creating a new cabin.
+ *
+ * The form includes the following fields:
+ * - Cabin name
+ * - Maximum capacity (number input)
+ * - Regular price (number input)
+ * - Discount (number input)
+ * - Description (textarea)
+ * - Cabin photo (file input)
+ *
+ * When submitted, the form outputs the captured data,
+ * ensuring that the image value is either a new file or retains the existing cabin image's name.
+ *
+ * @param cabin - The cabin data used to populate the form. If `cabin.id` exists, the form is in edit mode.
+ *
+ * @returns The JSX element representing the cabin creation/edit form.
+ */
 function CreateCabinForm({ cabin }: { cabin: Payment }) {
+    const { id: editId, ...editValue } = cabin
+    const { editCabin, isEditing } = useEditCabin()
+    const isEditSession = Boolean(editId)
+
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: cabin.id ? { ...cabin, image: undefined } : { image: undefined },
+        defaultValues: isEditSession ? { ...editValue, image: undefined } : { image: undefined },
     })
 
 
 
-    function onSubmit(data: {
-        regularPrice: number
-        image?: File | undefined
-        discount: number
-        maxCapacity: number
-        name: string
-    }) {
-        console.log({
-            ...data,
-            image: data.image?.name ?? cabin.image,
-        });
-
+    function onSubmit(data: ISubmit) {
+        const image = !data.image ? editValue.image : data.image;
+        if (isEditSession) {
+            editCabin(
+                {
+                    newCabinData: {
+                        ...data,
+                        image,
+                    },
+                    id: editId,
+                },
+                {
+                    onSuccess: () => {
+                        form.reset();
+                    },
+                }
+            );
+        }
     }
 
     return (
@@ -189,7 +232,7 @@ function CreateCabinForm({ cabin }: { cabin: Payment }) {
                         );
                     }}
                 />
-                <Button type="submit">Edit cabin</Button>
+                <Button type="submit" disabled={isEditing}>Edit cabin</Button>
                 <Button type="button" variant={"secondary"}>Cancel</Button>
             </form>
         </Form>
