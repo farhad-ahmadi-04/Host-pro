@@ -8,8 +8,7 @@ const useCreateCabin = () => {
   const { mutate: createCabin, isPending: isCreating } = useMutation({
     mutationFn: createEditCabin,
     onSuccess: () => {
-      toast.warning("New cabin successfully created");
-
+      toast.success("New cabin successfully created");
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
       });
