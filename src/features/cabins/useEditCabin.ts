@@ -8,6 +8,7 @@ export interface INewCabinData {
   discount: number;
   maxCapacity: number;
   name: string;
+  description: string;
 }
 
 const useEditCabin = () => {
