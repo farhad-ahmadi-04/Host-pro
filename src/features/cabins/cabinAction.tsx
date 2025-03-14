@@ -5,10 +5,12 @@ import { Payment } from "./cabinColumns";
 import { useState } from "react";
 import DeleteCabinAction from "./deleteCabinAction";
 import EditCabinAction from "./editCabinAction";
+import useCreateCabin from "./useCreateCabin";
 
 function CabinAction({ cabin }: { cabin: Payment }) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const { createCabin, isCreating } = useCreateCabin();
 
   return (
     <>
@@ -21,7 +23,16 @@ function CabinAction({ cabin }: { cabin: Payment }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
-          <DropdownMenuItem onClick={() => console.log(cabin)}>
+          <DropdownMenuItem
+            onClick={() => createCabin({
+              name: `copy of ${cabin.name}`,
+              maxCapacity: cabin.maxCapacity,
+              regularPrice: cabin.regularPrice,
+              discount: cabin.discount,
+              image: cabin.image,
+              description: cabin.description,
+            })}
+            disabled={isCreating}>
             Duplicate
           </DropdownMenuItem>
           {/* <DropdownMenuSeparator /> */}
