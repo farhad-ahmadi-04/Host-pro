@@ -25,7 +25,7 @@ function EditCabinAction({
                 <DialogTitle>Edit cabin</DialogTitle>
                 <DialogDescription>
                 </DialogDescription>
-                <CreateCabinForm cabin={cabin} />
+                <CreateCabinForm cabin={cabin} onClose={() => setIsEditDialogOpen?.(false)} />
             </DialogContent>
         </Dialog>
     );
