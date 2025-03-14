@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "@/components/ui/Header";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar"
+import { Toaster } from "@/components/ui/sonner";
 
 
 function AppLayout() {
@@ -18,7 +19,7 @@ function AppLayout() {
                         {/* container */}
                         <Outlet />
                     </main>
-
+                    <Toaster position="top-center" richColors />
                 </div>
 
             </SidebarProvider>
