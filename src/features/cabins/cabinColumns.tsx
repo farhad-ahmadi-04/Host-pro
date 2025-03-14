@@ -6,6 +6,8 @@ import CabinAction from "./cabinAction"
 
 // This type is used to define the shape of our data.
 export type Payment = {
+    created_at: string
+    description: string
     id: number
     regularPrice: number
     image: string
@@ -23,7 +25,7 @@ export const cabinColumns: ColumnDef<Payment>[] = [
             const imageUrl = row.original.image;
             return (
                 <img
-                    src={imageUrl.toString()}
+                    src={imageUrl}
                     alt="Cabin image"
                     width={100}
                     height={100}
