@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { IBooking } from "@/types/bookingTypes";
 import { MoreHorizontal } from "lucide-react"
+import { useNavigate } from "react-router-dom";
 
 
 function BookingsAction({ bookings }: { bookings: IBooking }) {
-    console.log(bookings);
+    const navigate = useNavigate()
 
     return (
         <DropdownMenu>
@@ -18,13 +19,21 @@ function BookingsAction({ bookings }: { bookings: IBooking }) {
             <DropdownMenuContent align="end">
                 {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
                 <DropdownMenuItem
-                    onClick={() => navigator.clipboard.writeText(bookings.id.toString())}
+                    onClick={() => navigate(`${bookings.id}`)}
                 >
                     Details
                 </DropdownMenuItem>
                 {/* <DropdownMenuSeparator /> */}
-                {bookings.status === "unconfirmed" && <DropdownMenuItem>Check in</DropdownMenuItem>}
-                {bookings.status === "checked-in" && <DropdownMenuItem>Check out</DropdownMenuItem>}
+                {bookings.status === "unconfirmed" &&
+                    <DropdownMenuItem
+                        onClick={() => navigate(`/checkIn/${bookings.id}`)}
+                    >
+                        Check in
+                    </DropdownMenuItem>}
+
+                {bookings.status === "checked-in" &&
+                    <DropdownMenuItem>Check out</DropdownMenuItem>
+                }
                 <DropdownMenuItem>Delete</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
