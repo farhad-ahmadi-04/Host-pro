@@ -79,6 +79,23 @@ export const bookingsColumns: ColumnDef<IBooking>[] = [
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            // styling
+            const unconfirmedStyle = row.original.status === "unconfirmed" && "bg-chart-4"
+            const checkOutStyle = row.original.status === "checked-out" && "bg-ring"
+            const checkInStyle = row.original.status === "checked-in" && "bg-chart-2"
+            // start with capital letter
+            const capitalized =
+                row.original.status.charAt(0).toUpperCase()
+                + row.original.status.slice(1)
+            return (
+                <span
+                    className={`${row.original.status === "checked-out" && checkOutStyle}
+                    ${row.original.status === "unconfirmed" && unconfirmedStyle}
+                    ${row.original.status === "checked-in" && checkInStyle} block w-10/12 text-center rounded`}
+                >{capitalized.split("-").join(" ")}</span>
+            )
+        }
     },
     {
         accessorKey: "totalPrice",
