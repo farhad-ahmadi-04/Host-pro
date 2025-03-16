@@ -30,3 +30,12 @@ export const getBookings = async ({ page, filter }: getBookingsProps) => {
 
   return { data, error, count };
 };
+
+// delete booking
+export const deleteBookingApi = async (id: number) => {
+  const { error, data } = await supabase.from("bookings").delete().eq("id", id);
+
+  if (error) throw new Error("Failed to deleting booking...");
+
+  return data;
+};
