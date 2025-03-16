@@ -13,7 +13,10 @@ const useDeleteCabin = () => {
         queryKey: ["cabins"],
       });
     },
-    onError: (error) => console.error(error),
+    onError: (error) => {
+      toast.error(error.message);
+      console.error(error);
+    },
   });
 
   return { deleteCabin, isDeleting };
