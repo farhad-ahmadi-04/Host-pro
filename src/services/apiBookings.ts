@@ -1,5 +1,6 @@
 import { PAGE_SIZE } from "@/lib/utils";
 import supabase from "@/services/supabase";
+import { IBooking } from "@/types/bookingTypes";
 
 interface getBookingsProps {
   page: number;
@@ -29,6 +30,22 @@ export const getBookings = async ({ page, filter }: getBookingsProps) => {
   if (error) throw new Error("failed to get bookings");
 
   return { data, error, count };
+};
+
+// get booking details
+export const getBooking = async (bookingId: number): Promise<IBooking> => {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*, cabins(*), guests(*)")
+    .eq("id", bookingId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking not found");
+  }
+
+  return data;
 };
 
 // delete booking
