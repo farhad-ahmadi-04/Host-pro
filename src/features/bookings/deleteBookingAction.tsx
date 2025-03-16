@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import useDeleteBooking from "./useDeleteBooking";
+import { useNavigate } from "react-router-dom";
 
 function DeleteBookingAction({
     isDeleteDialogOpen,
@@ -12,6 +13,7 @@ function DeleteBookingAction({
         setIsDeleteDialogOpen: ((open: boolean) => void) | undefined
     }) {
     const { deleteBooking, isDeleting } = useDeleteBooking()
+    const navigate = useNavigate()
 
     return (
         <Dialog open={isDeleteDialogOpen}
@@ -35,7 +37,10 @@ function DeleteBookingAction({
                         <Button
                             disabled={isDeleting}
                             variant={"destructive"}
-                            onClick={() => deleteBooking(bookingId)}>
+                            onClick={() => {
+                                deleteBooking(bookingId)
+                                navigate("/bookings")
+                            }}>
                             Delete
                         </Button>
                     </DialogClose>
