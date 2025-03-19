@@ -6,6 +6,9 @@ import Container from "@/components/ui/container";
 import DeleteBookingAction from "./deleteBookingAction";
 import { useState } from "react";
 import BookingDataBox from "./bookingDataBox";
+import { ArrowLeft } from "lucide-react";
+import { statusStyle } from "@/config/statusStyle";
+
 
 function BookingDetails() {
     const { booking, errorBooking, loadingBooking } = useBooking()
@@ -21,7 +24,18 @@ function BookingDetails() {
 
     return (
         <Container className="flex flex-col gap-4">
-
+            <div className="w-full flex justify-between">
+                <Button variant={"outline"} onClick={() => navigate(-1)}>
+                    <ArrowLeft />
+                    Back
+                </Button>
+                <div className="flex w-full gap-4 items-center justify-end">
+                    <h1 className="font-semibold text-xl">Booking #{booking?.id}</h1>
+                    <span className={`${booking && statusStyle[booking.status]} h-fit px-4 text-center rounded`}>
+                        {booking && booking.status.charAt(0).toLocaleUpperCase() + booking.status.slice(1).split("-").join(" ")}
+                    </span>
+                </div>
+            </div>
             <BookingDataBox booking={booking} />
 
             <div className="w-full text-end space-x-2">
