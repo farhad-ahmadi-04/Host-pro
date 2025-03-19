@@ -10,9 +10,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { formatCurrency } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import useChecking from "./useChecking";
+
+interface BreakfastOptions {
+    hasBreakfast?: boolean;
+    extrasPrice?: number;
+    totalPrice?: number;
+}
 
 function CheckIn() {
     const { booking, errorBooking, loadingBooking } = useBooking()
+    const { checkin, isChecking } = useChecking()
     const navigate = useNavigate()
     const [isPaid, setIsPaid] = useState(false)
     const [addBreakfast, setAddBreakfast] = useState(false)
@@ -25,6 +33,31 @@ function CheckIn() {
     if (errorBooking) return <h1 className="text-center font-bold">{errorBooking.message}...</h1>
 
     const optionalBreakfastPrice = booking && 10 * booking?.numGuests * booking?.numNights
+    // handle check in
+    const handleChecking = () => {
+        if (!isPaid) return
+
+
+        if (booking) {
+
+            const breakfast: BreakfastOptions = isPaid
+                ? {
+                    hasBreakfast: true,
+                    extrasPrice: optionalBreakfastPrice,
+                    totalPrice: booking.totalPrice + (optionalBreakfastPrice ?? 0),
+                }
+                : {};
+
+            checkin(
+                { bookingId: booking.id, breakfast },
+                {
+                    onSuccess: () => navigate("/"),
+                }
+            );
+        }
+    }
+
+
 
     return (
         <Container className="flex flex-col gap-4">
@@ -52,7 +85,8 @@ function CheckIn() {
                             onClick={() => {
                                 setAddBreakfast((confirm) => !confirm)
                                 setIsPaid(false)
-                            }} />
+                            }}
+                            disabled={isChecking} />
                         <Label htmlFor="breakfast">
                             Want to add breakfast for {optionalBreakfastPrice && formatCurrency(optionalBreakfastPrice)}?
                         </Label>
@@ -66,7 +100,7 @@ function CheckIn() {
                         onClick={() => {
                             setIsPaid((confirm) => !confirm)
                         }}
-                        disabled={isPaid} />
+                        disabled={isPaid || isChecking} />
                     <Label htmlFor="paid">
                         I confirm that {booking?.guests.fullName} has paid the total mount
                         {!addBreakfast ?
@@ -85,7 +119,7 @@ function CheckIn() {
             <div className="w-full text-end space-x-2">
                 {booking &&
                     <>
-                        <Button disabled={!isPaid}>Check in booking #{booking.id}</Button>
+                        <Button onClick={handleChecking} disabled={!isPaid || isChecking}>Check in booking #{booking.id}</Button>
                         <Button variant={"outline"} onClick={() => navigate(-1)}>
                             Back
                         </Button>
