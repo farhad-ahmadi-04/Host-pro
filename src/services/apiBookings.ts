@@ -56,3 +56,19 @@ export const deleteBookingApi = async (id: number) => {
 
   return data;
 };
+
+// update booking information
+export const UpdateBooking = async (
+  id: number,
+  obj: { status: string; isPaid: boolean; breakfast?: boolean }
+) => {
+  const { data, error } = await supabase
+    .from("bookings")
+    .update(obj)
+    .eq("id", id)
+    .select();
+
+  if (error) throw new Error("Failed to update booking...");
+
+  return { data };
+};
