@@ -1,5 +1,7 @@
+import CheckIn from "@/features/check-in-out/checkIn";
+
 function Checkin() {
-    return (<h1>checkin</h1>);
+    return (<CheckIn />);
 }
 
 export default Checkin;
