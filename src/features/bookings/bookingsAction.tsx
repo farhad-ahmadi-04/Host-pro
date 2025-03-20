@@ -5,11 +5,13 @@ import { MoreHorizontal } from "lucide-react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteBookingAction from "./deleteBookingAction";
+import useCheckOut from "../check-in-out/useCheckOut";
 
 
 function BookingsAction({ bookings }: { bookings: IBooking }) {
     const navigate = useNavigate()
     const [isDeleteDialog, setIsDeleteDialog] = useState<boolean>(false)
+    const { checkOut, isCheckingOut } = useCheckOut()
 
     return (
         <>
@@ -36,7 +38,9 @@ function BookingsAction({ bookings }: { bookings: IBooking }) {
                         </DropdownMenuItem>}
 
                     {bookings.status === "checked-in" &&
-                        <DropdownMenuItem>Check out</DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => checkOut(bookings.id)}
+                            disabled={isCheckingOut}>Check out</DropdownMenuItem>
                     }
                     <DropdownMenuItem onClick={() => setIsDeleteDialog(true)}>
                         Delete</DropdownMenuItem>
