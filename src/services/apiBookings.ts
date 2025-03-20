@@ -1,3 +1,4 @@
+import { BreakfastOptions } from "@/features/check-in-out/checkIn";
 import { PAGE_SIZE } from "@/lib/utils";
 import supabase from "@/services/supabase";
 import { IBooking } from "@/types/bookingTypes";
@@ -60,7 +61,7 @@ export const deleteBookingApi = async (id: number) => {
 // update booking information
 export const UpdateBooking = async (
   id: number,
-  obj: { status: string; isPaid: boolean; breakfast?: boolean }
+  obj: { status: string; isPaid: boolean; breakfast?: BreakfastOptions }
 ) => {
   const { data, error } = await supabase
     .from("bookings")
