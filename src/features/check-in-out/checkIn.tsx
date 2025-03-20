@@ -12,7 +12,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import useChecking from "./useChecking";
 
-interface BreakfastOptions {
+export interface BreakfastOptions {
     hasBreakfast?: boolean;
     extrasPrice?: number;
     totalPrice?: number;
