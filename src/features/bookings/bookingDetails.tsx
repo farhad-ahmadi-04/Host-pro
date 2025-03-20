@@ -8,10 +8,12 @@ import { useState } from "react";
 import BookingDataBox from "./bookingDataBox";
 import { ArrowLeft } from "lucide-react";
 import { statusStyle } from "@/config/statusStyle";
+import useCheckOut from "../check-in-out/useCheckOut";
 
 
 function BookingDetails() {
     const { booking, errorBooking, loadingBooking } = useBooking()
+    const { checkOut, isCheckingOut } = useCheckOut()
     const navigate = useNavigate()
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
@@ -45,7 +47,13 @@ function BookingDetails() {
                             <Button onClick={() => navigate(`/checkin/${booking.id}`)}>Check in</Button>
                         }
                         {booking.status === "checked-in" &&
-                            <Button>Check out</Button>
+                            <Button
+                                onClick={() => checkOut(booking.id, {
+                                    onSuccess: () => navigate("/")
+                                })}
+                                disabled={isCheckingOut}>
+                                Check out
+                            </Button>
                         }
 
                         <Button variant={"destructive"}
