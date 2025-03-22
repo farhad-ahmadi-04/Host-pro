@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/Form";
 import { Input } from "@/components/ui/input";
+import Logo from "@/components/ui/logo";
 import Section from "@/components/ui/section";
 import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
@@ -14,7 +15,12 @@ interface IForm {
 
 
 function LoginForm() {
-    const form = useForm<IForm>()
+    const form = useForm<IForm>({
+        defaultValues: {
+            email: "host.pro@gmail.com",
+            password: "12345678",
+        }
+    })
 
     const onSubmit = (values: IForm) => {
         console.log(values);
@@ -31,7 +37,8 @@ function LoginForm() {
         <Section>
             <Container className="flex justify-center items-center h-dvh">
                 <div className="flex  flex-col gap-10">
-                    <div>
+                    <div className="flex flex-col items-center">
+                        <Logo className="mb-5" />
                         <h1 className="text-3xl font-semibold">Login in to your account</h1>
                         <Separator className="mt-5" />
                     </div>
@@ -46,7 +53,6 @@ function LoginForm() {
                                             <FormLabel className="md:text-nowrap">Email address</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    defaultValue={"host.pro@gmail.com"}
                                                     type="email"
                                                     placeholder="email address"
                                                     {...form.register("email", { required: true })}
@@ -64,7 +70,6 @@ function LoginForm() {
                                             <FormLabel className="md:text-nowrap">Password</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    defaultValue={"12345678"}
                                                     type="password"
                                                     placeholder="password"
                                                     {...form.register("password", { required: true, minLength: 8 })}
