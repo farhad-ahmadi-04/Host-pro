@@ -5,32 +5,32 @@ import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
 import Section from "@/components/ui/section";
 import { Separator } from "@/components/ui/separator";
+import { IUserLogin } from "@/types/authTypes";
 import { useForm } from "react-hook-form";
-
-
-interface IForm {
-    email: string;
-    password: string;
-}
-
+import useLogin from "./useLogin";
 
 function LoginForm() {
-    const form = useForm<IForm>({
+    const { isLogin, login } = useLogin()
+    const form = useForm<IUserLogin>({
         defaultValues: {
             email: "host.pro@gmail.com",
             password: "12345678",
         }
     })
 
-    const onSubmit = (values: IForm) => {
-        console.log(values);
+    const onSubmit = (values: IUserLogin) => {
         // Call your login API here
+        login({ email: values.email, password: values.password },
+            {
+                onSuccess: () => {
+                    form.reset({
+                        email: "",
+                        password: "",
+                    });
+                }
+            }
+        )
         // For now, we'll just simulate a success
-        alert("Logged in successfully!");
-        form.reset({
-            email: "",
-            password: "",
-        });
     }
 
     return (
@@ -53,6 +53,7 @@ function LoginForm() {
                                             <FormLabel className="md:text-nowrap">Email address</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    disabled={isLogin}
                                                     type="email"
                                                     placeholder="email address"
                                                     {...form.register("email", { required: true })}
@@ -70,6 +71,7 @@ function LoginForm() {
                                             <FormLabel className="md:text-nowrap">Password</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    disabled={isLogin}
                                                     type="password"
                                                     placeholder="password"
                                                     {...form.register("password", { required: true, minLength: 8 })}
@@ -82,7 +84,7 @@ function LoginForm() {
                             </div>
 
 
-                            <Button type="submit" className="w-full">Login</Button>
+                            <Button disabled={isLogin} type="submit" className="w-full">Login</Button>
                         </form>
                     </Form>
                 </div>
