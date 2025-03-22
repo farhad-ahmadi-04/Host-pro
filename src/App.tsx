@@ -18,6 +18,7 @@ import Settings from "@/pages/settings"
 import Account from "@/pages/account"
 import Login from "@/pages/login"
 import PageNotFound from "@/pages/pageNotFound"
+import { Toaster } from "./components/ui/sonner"
 
 // create a new query client
 const queryClient = new QueryClient({
@@ -33,7 +34,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         {/* active  QueryDevtools*/}
         <ReactQueryDevtools initialIsOpen={true} />
-
+        <Toaster position="top-center" richColors />
         <BrowserRouter>
           <Routes>
             <Route element={
