@@ -5,8 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./button";
 import { Github, LogOut, User } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog";
+import useLogout from "@/features/authentication/useLogout";
 
 function Header({ children }: { children: React.ReactNode }) {
+    const { isLogout, logout } = useLogout()
+
     return (
         <header className="w-full flex justify-between items-center md:p-3 bg-sidebar border-b border-sidebar-border shadow-sm shadow-sidebar">
             <div>
@@ -41,10 +44,13 @@ function Header({ children }: { children: React.ReactNode }) {
                         </DialogHeader>
                         <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
-                                <Button>Cancel</Button>
+                                <Button disabled={isLogout}>Cancel</Button>
                             </DialogClose>
                             <DialogClose asChild>
-                                <Button variant={"outline"}>Logout</Button>
+                                <Button
+                                    disabled={isLogout}
+                                    variant={"outline"}
+                                    onClick={() => logout()}>Logout</Button>
                             </DialogClose>
 
                         </DialogFooter>
