@@ -19,6 +19,7 @@ import Account from "@/pages/account"
 import Login from "@/pages/login"
 import PageNotFound from "@/pages/pageNotFound"
 import { Toaster } from "./components/ui/sonner"
+import ProtectedRoute from "./components/protectedRoute"
 
 // create a new query client
 const queryClient = new QueryClient({
@@ -38,7 +39,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={
-              <AppLayout />
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
             }>
               <Route index element={<Navigate replace to={"dashboard"} />} />
               <Route path="dashboard" element={<Dashboard />} />
