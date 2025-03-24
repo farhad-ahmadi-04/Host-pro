@@ -1,4 +1,4 @@
-import { IUserLogin } from "@/types/authTypes";
+import { IUserLogin, IUserSignup } from "@/types/authTypes";
 import supabase from "./supabase";
 
 // login
@@ -31,4 +31,22 @@ export const getCurrentUser = async () => {
 export const logoutApi = async () => {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
+};
+
+// signup
+export const signupApi = async ({ email, password, fullName }: IUserSignup) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fullName,
+        avatar: "",
+      },
+    },
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
 };
