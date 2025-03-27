@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./button";
 import { Github, LogOut, User } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog";
 import useLogout from "@/features/authentication/useLogout";
+import AvatarAction from "../avatarAction";
+import useUser from "@/features/authentication/useUser";
 
 function Header({ children }: { children: React.ReactNode }) {
     const { isLogout, logout } = useLogout()
+    const { currentUser } = useUser()
 
     return (
         <header className="w-full flex justify-between items-center md:p-3 bg-sidebar border-b border-sidebar-border shadow-sm shadow-sidebar">
@@ -17,11 +19,8 @@ function Header({ children }: { children: React.ReactNode }) {
             </div>
             <div className="flex items-center gap-1">
                 <div className="flex items-center gap-2">
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <span>user name</span>
+                    <AvatarAction />
+                    <span>{currentUser?.user_metadata.fullName}</span>
                 </div>
                 <Link to={'https://github.com/farhad-ahmadi-04/'} target="_blank">
                     <Button size={"icon"} variant={"ghost"}><Github /></Button>
