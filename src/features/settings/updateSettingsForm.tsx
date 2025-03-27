@@ -22,7 +22,7 @@ function UpdateSettingsForm() {
     return (
         <form>
             <div className="w-full md:grid grid-cols-4 items-center">
-                <Label className="text-nowrap">Minimum nights/booking</Label>
+                <Label className="text-nowrap">Minimum Stay Rules</Label>
                 <div className="w-full col-span-3">
                     <Input
                         type="number"
@@ -36,7 +36,7 @@ function UpdateSettingsForm() {
             <Separator className="my-5" />
 
             <div className="w-full md:grid md:grid-cols-4 items-center">
-                <Label className="text-nowrap w-1/2">Maximum nights/booking</Label>
+                <Label className="text-nowrap w-1/2">Maximum Stay Rules</Label>
                 <div className="w-full col-span-3">
                     <Input
                         type="number"
@@ -50,7 +50,7 @@ function UpdateSettingsForm() {
             <Separator className="my-5" />
 
             <div className="w-full md:grid md:grid-cols-4 items-center">
-                <Label className="text-nowrap w-1/2">Maximum guests/booking</Label>
+                <Label className="text-nowrap w-1/2">Guest Limit Rules</Label>
                 <div className="w-full col-span-3">
                     <Input
                         type="number"
