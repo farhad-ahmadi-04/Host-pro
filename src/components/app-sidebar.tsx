@@ -5,12 +5,14 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
+    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import Logo from "./ui/logo"
+import { Separator } from "./ui/separator"
 
 const items = [
     {
@@ -42,16 +44,22 @@ const items = [
 
 
 export function AppSidebar() {
+    const { pathname } = useLocation()
+    const currentUrl = pathname.split("/")[1]
+
     return (
         <Sidebar collapsible="icon">
+            <SidebarHeader>
+                <Logo className="max-w-32 mt-5" />
+            </SidebarHeader>
+            <Separator className="mt-5" />
             <SidebarContent>
-                <SidebarGroup className="md:p-3">
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                <SidebarGroup className="text-center">
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild className="md:py-6">
+                                    <SidebarMenuButton asChild className="md:py-6" isActive={currentUrl === item.title.toLocaleLowerCase()}>
                                         <Link to={item.url}>
                                             <item.icon />
                                             <span className="md:text-base">{item.title}</span>
