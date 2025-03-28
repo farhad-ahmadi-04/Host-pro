@@ -1,5 +1,6 @@
 import Container from "@/components/ui/container";
 import Section from "@/components/ui/section";
+import UpdatePasswordForm from "@/features/authentication/updatePasswordForm";
 import UpdateUserDataForm from "@/features/authentication/updateUserDataForm";
 
 function Account() {
@@ -11,7 +12,7 @@ function Account() {
                 </div>
                 <div className="flex flex-col md:flex-row justify-between gap-5">
                     <UpdateUserDataForm />
-                    <UpdateUserDataForm />
+                    <UpdatePasswordForm />
                 </div>
             </Container>
         </Section>
