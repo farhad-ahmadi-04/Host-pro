@@ -1,10 +1,7 @@
-function Dashboard() {
-    return (
-        <div className="flex items-center justify-center">
-            Dashboard
-        </div>
+import DashboardLayout from "@/features/dashbord/DashboardLayout";
 
-    );
+function Dashboard() {
+    return (<DashboardLayout />);
 }
 
 export default Dashboard;
