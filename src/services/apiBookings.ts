@@ -1,5 +1,5 @@
 import { BreakfastOptions } from "@/features/check-in-out/checkIn";
-import { PAGE_SIZE } from "@/lib/utils";
+import { getToday, PAGE_SIZE } from "@/lib/utils";
 import supabase from "@/services/supabase";
 import { IBooking } from "@/types/bookingTypes";
 
@@ -72,4 +72,19 @@ export const UpdateBooking = async (
   if (error) throw new Error("Failed to update booking...");
 
   return { data };
+};
+
+export const getBookingAfterDate = async (date: string) => {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("created_at, totalPrice, extrasPrice")
+    .gte("created_at", date)
+    .lte("created_at", getToday({ end: true }));
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+
+  return data;
 };
