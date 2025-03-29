@@ -1,9 +1,19 @@
 import Container from "@/components/ui/container";
 import Section from "@/components/ui/section";
-import DashboardBox from "./DashboardBox";
 import Filter from "@/components/ui/filter";
+import useRecentBookings from "./useRecentBookings";
+import Stats from "./stats";
+import useCabins from "../cabins/useCabins";
+
+
 
 function DashboardLayout() {
+    const { bookings, isLoading } = useRecentBookings()
+    const { cabins, isLoading: isLoading02 } = useCabins()
+
+    if (isLoading || isLoading02) return <p>Loading...</p>
+
+
     return (
         <Section>
             <Container className="space-y-5">
@@ -15,12 +25,9 @@ function DashboardLayout() {
                         { value: "90", label: "Last 90 days" },
                     ]} />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <DashboardBox />
-                    <DashboardBox />
-                    <DashboardBox />
-                    <DashboardBox />
-                </div>
+
+                <Stats bookings={bookings} cabins={cabins} />
+
             </Container>
         </Section>
     );
