@@ -38,3 +38,9 @@ export interface IBooking {
   cabins: ICabin;
   guests: IGuest;
 }
+
+export interface IBookingsState {
+  created_at: string;
+  totalPrice: number;
+  extrasPrice: number;
+}
