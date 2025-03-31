@@ -4,15 +4,14 @@ import Filter from "@/components/ui/filter";
 import useRecentBookings from "./useRecentBookings";
 import Stats from "./stats";
 import useCabins from "../cabins/useCabins";
+import { useRecentStays } from "./useRecentStays";
 
 
 
 function DashboardLayout() {
     const { bookings, isLoading } = useRecentBookings()
-    const { cabins, isLoading: isLoading02 } = useCabins()
-
-    if (isLoading || isLoading02) return <p>Loading...</p>
-
+    const { confirmedStays, isLoading: isLoading02, numDays } = useRecentStays()
+    const { cabins, isLoading: isLoading03 } = useCabins()
 
     return (
         <Section>
@@ -25,9 +24,15 @@ function DashboardLayout() {
                         { value: "90", label: "Last 90 days" },
                     ]} />
                 </div>
-
-                <Stats bookings={bookings} cabins={cabins} />
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <Stats
+                        bookings={bookings}
+                        confirmedStays={confirmedStays || []}
+                        numDays={numDays}
+                        cabins={cabins?.length}
+                        loading={isLoading || isLoading02 || isLoading03}
+                    />
+                </div>
             </Container>
         </Section>
     );
