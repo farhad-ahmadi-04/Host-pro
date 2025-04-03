@@ -5,6 +5,7 @@ import useRecentBookings from "./useRecentBookings";
 import Stats from "./stats";
 import useCabins from "../cabins/useCabins";
 import { useRecentStays } from "./useRecentStays";
+import TodayActivity from "../check-in-out/todayActivity";
 
 
 
@@ -32,6 +33,9 @@ function DashboardLayout() {
                         cabins={cabins?.length}
                         loading={isLoading || isLoading02 || isLoading03}
                     />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                    <TodayActivity />
                 </div>
             </Container>
         </Section>
