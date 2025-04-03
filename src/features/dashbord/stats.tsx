@@ -2,7 +2,6 @@ import { IBooking, IBookingsState } from "@/types/bookingTypes";
 import Stat from "./stat";
 import { Briefcase, CalendarDays, ChartColumnIncreasing, DollarSign } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
 
 function Stats({ bookings = [], cabins = 0, confirmedStays, numDays, loading }: {
     bookings?: IBookingsState[];
@@ -27,26 +26,28 @@ function Stats({ bookings = [], cabins = 0, confirmedStays, numDays, loading }: 
         (numDays * cabins);
     // num checked in nights / all available nights ()num days * num cabins)
 
-    if (loading) return <Skeleton className="h-10 md:h-20" />
-
     return (
         <>
             <Stat
                 title={"Bookings"}
                 icon={<Briefcase />}
-                value={numBookings} />
+                value={numBookings}
+                loading={loading} />
             <Stat
                 title={"Sales"}
                 icon={<DollarSign />}
-                value={formatCurrency(sales)} />
+                value={formatCurrency(sales)}
+                loading={loading} />
             <Stat
                 title={"Check ins"}
                 icon={<CalendarDays />}
-                value={checkins.toString()} />
+                value={checkins.toString()}
+                loading={loading} />
             <Stat
                 title={"Occupancy rate"}
                 icon={<ChartColumnIncreasing />}
-                value={Math.round(occupation * 100) + "%"} />
+                value={Math.round(occupation * 100) + "%"}
+                loading={loading} />
         </>
 
     );
