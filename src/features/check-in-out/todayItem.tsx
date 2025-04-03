@@ -13,7 +13,7 @@ function TodayItem({ activity }: { activity: IBooking }) {
     }
 
     return (
-        <div className="grid grid-cols-3 md:grid-cols-[20%_1fr_15%_1fr] gap-x-2 gap-y-3 items-center">
+        <div className="grid grid-cols-3 md:grid-cols-[20%_35%_17%_1fr] gap-x-2 gap-y-3 items-center">
             <span className={`${statusStyle[status]} text-center text-sm rounded truncate`}>
                 {status === "unconfirmed" && String("Arriving").toLocaleUpperCase()}
                 {status === "checked-in" && String("Departing").toLocaleUpperCase()}
@@ -27,10 +27,14 @@ function TodayItem({ activity }: { activity: IBooking }) {
             <span className="truncate">{numNights} Nights</span>
 
             {status === "unconfirmed" &&
-                <Button className="col-span-3 md:col-span-1" onClick={() => navigate(`/checkin/${id}`)} size={"sm"}>CHECK IN</Button>
+                <Button
+                    className="col-span-3 md:col-span-1 md:w-fit"
+                    onClick={() => navigate(`/checkin/${id}`)}>
+                    CHECK IN
+                </Button>
             }
             {status === "checked-in" &&
-                <CheckOutButton className="col-span-3 md:col-span-1" bookingId={id}>CHECK OUT</CheckOutButton>
+                <CheckOutButton className="col-span-3 md:col-span-1 md:w-fit" bookingId={id}>CHECK OUT</CheckOutButton>
             }
 
         </div>
