@@ -3,7 +3,7 @@ import React from "react";
 
 function Container({ className, children }: { className?: string, children: React.ReactNode }) {
     return (
-        <div className={cn("w-full max-w-[1400px]", className)}>
+        <div className={cn("w-full m-auto max-w-[1400px]", className)}>
             {children}
         </div>
     );

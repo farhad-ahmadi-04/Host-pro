@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import useBooking from "./useBooking";
 import { Skeleton } from "@/components/ui/skeleton";
-import Container from "@/components/ui/container";
 import DeleteBookingAction from "./deleteBookingAction";
 import { useState } from "react";
 import BookingDataBox from "./bookingDataBox";
@@ -25,7 +24,7 @@ function BookingDetails() {
     if (errorBooking) return <h1 className="text-center font-bold">{errorBooking.message}...</h1>
 
     return (
-        <Container className="flex flex-col gap-4">
+        <>
             <div className="w-full flex justify-between">
                 <Button variant={"outline"} onClick={() => navigate(-1)}>
                     <ArrowLeft />
@@ -68,10 +67,7 @@ function BookingDetails() {
                     </>
                 }
             </div>
-
-
-
-        </Container>
+        </>
     );
 }
 
