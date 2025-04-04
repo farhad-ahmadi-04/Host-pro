@@ -28,13 +28,14 @@ function TodayItem({ activity }: { activity: IBooking }) {
 
             {status === "unconfirmed" &&
                 <Button
-                    className="col-span-3 md:col-span-1 md:w-fit"
+                    className="col-span-3 md:col-span-1"
+                    size={"sm"}
                     onClick={() => navigate(`/checkin/${id}`)}>
                     CHECK IN
                 </Button>
             }
             {status === "checked-in" &&
-                <CheckOutButton className="col-span-3 md:col-span-1 md:w-fit" bookingId={id}>CHECK OUT</CheckOutButton>
+                <CheckOutButton className="col-span-3 md:col-span-1" bookingId={id}>CHECK OUT</CheckOutButton>
             }
 
         </div>

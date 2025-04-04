@@ -10,6 +10,7 @@ function CheckOutButton({ bookingId, children, className }: { bookingId: number,
             disabled={isCheckingOut}
             onClick={() => checkOut(bookingId)}
             className={className}
+            size={"sm"}
         >
             {children}
         </Button>
