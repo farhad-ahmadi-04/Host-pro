@@ -19,42 +19,42 @@ const startData = [
     {
         duration: "1 night",
         value: 0,
-        color: "oklch(0.645 0.246 16.439)",
+        color: "var(--chart-1)",
     },
     {
         duration: "2 nights",
         value: 0,
-        color: "#f97316",
+        color: "var(--chart-2)",
     },
     {
         duration: "3 nights",
         value: 0,
-        color: "oklch(0.769 0.188 70.08)",
+        color: "var(--chart-3)",
     },
     {
         duration: "4-5 nights",
         value: 0,
-        color: "oklch(0.627 0.265 303.9)",
+        color: "var(--chart-4)",
     },
     {
         duration: "6-7 nights",
         value: 0,
-        color: "oklch(0.696 0.17 162.48)",
+        color: "var(--chart-5)",
     },
     {
         duration: "8-14 nights",
         value: 0,
-        color: "#14b8a6",
+        color: "var(--chart-6)",
     },
     {
         duration: "15-21 nights",
         value: 0,
-        color: "oklch(0.488 0.243 264.376)",
+        color: "var(--chart-7)",
     },
     {
         duration: "21+ nights",
         value: 0,
-        color: "#a855f7",
+        color: "var(--chart-8)",
     },
 ];
 
@@ -62,25 +62,37 @@ const chartConfig = {
     visitors: {
         label: "Visitors",
     },
-    chrome: {
-        label: "Chrome",
-        color: "hsl(var(--chart-1))",
+    "1night": {
+        label: "1 night",
+        color: "var(--chart-1)",
     },
-    safari: {
-        label: "Safari",
-        color: "hsl(var(--chart-2))",
+    "2 nights": {
+        label: "2 nights",
+        color: "var(--chart-2)",
     },
-    firefox: {
-        label: "Firefox",
-        color: "hsl(var(--chart-3))",
+    "3 nights": {
+        label: "3 nights",
+        color: "var(--chart-3)",
     },
-    edge: {
-        label: "Edge",
-        color: "hsl(var(--chart-4))",
+    "4-5 nights": {
+        label: "4-5 nights",
+        color: "var(--chart-4)",
     },
-    other: {
-        label: "Other",
-        color: "hsl(var(--chart-5))",
+    "6-7 nights": {
+        label: "6-7 nights",
+        color: "var(--chart-5)",
+    },
+    "8-14 nights": {
+        label: "8-14 nights",
+        color: "var(--chart-6)",
+    },
+    "15-21 nights": {
+        label: "15-21 nights",
+        color: "var(--chart-7)",
+    },
+    "21+ nights": {
+        label: "21+ nights",
+        color: "var(--chart-8)",
     },
 } satisfies ChartConfig
 

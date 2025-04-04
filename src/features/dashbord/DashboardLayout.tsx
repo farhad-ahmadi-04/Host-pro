@@ -41,7 +41,7 @@ function DashboardLayout() {
                     <DurationChart confirmedStays={confirmedStays || []} />
                 </div>
                 <div>
-                    <SalesChart bookings={bookings} numDays={numDays} />
+                    <SalesChart bookings={bookings || []} numDays={numDays} />
                 </div>
             </Container>
         </Section>
