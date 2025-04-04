@@ -21,6 +21,7 @@ function DeleteBookingAction({
                 setIsDeleteDialogOpen : undefined}>
             <DialogTrigger>
             </DialogTrigger>
+
             {/* content */}
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>

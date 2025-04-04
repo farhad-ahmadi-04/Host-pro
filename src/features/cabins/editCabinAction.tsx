@@ -21,7 +21,7 @@ function EditCabinAction({
             <DialogTrigger>
             </DialogTrigger>
             {/* content */}
-            <DialogContent className="sm:max-w-md max-h-9/12 overflow-y-auto">
+            <DialogContent className="sm:max-w-md max-h-9/12 overflow-y-auto top-[10%]">
                 <DialogTitle>Edit cabin</DialogTitle>
                 <DialogDescription>
                 </DialogDescription>
