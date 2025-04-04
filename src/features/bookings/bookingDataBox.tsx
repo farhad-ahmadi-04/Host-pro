@@ -1,7 +1,8 @@
 
 import { statusStyle } from "@/config/statusStyle";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDistanceFromNow } from "@/lib/utils";
 import { IBooking } from "@/types/bookingTypes";
+import { format, isToday } from "date-fns";
 import { BadgeCheck, BadgeX, Dot, Euro, HouseIcon } from "lucide-react";
 
 function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
@@ -13,7 +14,13 @@ function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
                         <HouseIcon />
                         {booking?.numNights} night(s) in cabin {booking?.cabins.name}
                     </span>
-                    <span>{booking?.created_at}</span>
+                    <span>
+                        {booking && format(new Date(booking.startDate), "EEE, MMM dd yyyy")} (
+                        {booking && isToday(new Date(booking.startDate))
+                            ? "Today"
+                            : booking && formatDistanceFromNow(booking.startDate)}
+                        ) &mdash; {booking && format(new Date(booking.endDate), "EEE, MMM dd yyyy")}
+                    </span>
                 </div>
             </div>
             <div className="p-4 flex flex-col gap-4">
