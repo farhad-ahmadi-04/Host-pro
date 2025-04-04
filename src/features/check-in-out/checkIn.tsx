@@ -1,4 +1,3 @@
-import Container from "@/components/ui/container";
 import BookingDataBox from "../bookings/bookingDataBox";
 import useBooking from "../bookings/useBooking";
 import { Button } from "@/components/ui/button";
@@ -60,8 +59,8 @@ function CheckIn() {
 
 
     return (
-        <Container className="flex flex-col gap-4">
-            <div className="w-full flex justify-between">
+        <>
+            <div className="w-full flex justify-between mb-2">
                 <Button variant={"outline"} onClick={() => navigate(-1)}>
                     <ArrowLeft />
                     Back
@@ -76,7 +75,7 @@ function CheckIn() {
 
             <BookingDataBox booking={booking} />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-3">
                 {!booking?.hasBreakfast &&
                     <div className="flex items-center gap-4">
                         <Checkbox
@@ -126,7 +125,7 @@ function CheckIn() {
                     </>
                 }
             </div>
-        </Container>
+        </>
     );
 }
 

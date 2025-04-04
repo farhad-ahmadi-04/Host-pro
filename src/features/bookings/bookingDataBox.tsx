@@ -1,4 +1,5 @@
 
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { statusStyle } from "@/config/statusStyle";
 import { formatCurrency, formatDistanceFromNow } from "@/lib/utils";
 import { IBooking } from "@/types/bookingTypes";
@@ -7,8 +8,8 @@ import { BadgeCheck, BadgeX, Dot, Euro, HouseIcon } from "lucide-react";
 
 function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
     return (
-        <div className="bg-sidebar rounded">
-            <div className={`flex justify-between p-4 text-lg ${booking && statusStyle[booking.status]} rounded`}>
+        <Card className="pt-0">
+            <CardHeader className={`flex justify-between p-4 text-lg ${booking && statusStyle[booking.status]} rounded`}>
                 <div className="flex gap-4 justify-between w-full">
                     <span className="flex gap-4 items-center">
                         <HouseIcon />
@@ -22,8 +23,8 @@ function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
                         ) &mdash; {booking && format(new Date(booking.endDate), "EEE, MMM dd yyyy")}
                     </span>
                 </div>
-            </div>
-            <div className="p-4 flex flex-col gap-4">
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4">
                 <div className="py-4 space-y-3">
                     <div className="flex gap-4">
                         <img src={booking?.guests.countryFlag} alt={booking?.guests.nationality} className="w-6 h-5" />
@@ -54,14 +55,14 @@ function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
                     </span>
                     <span>{booking?.isPaid ? <BadgeCheck /> : <BadgeX />}</span>
                 </div>
-                <div className="text-sm text-end">
+                <CardFooter className="text-sm justify-end">
                     Booked {booking &&
                         `${new Date(booking?.created_at).toLocaleDateString("en-US", { dateStyle: "full" })}
                         ${new Date(booking?.created_at).toLocaleTimeString("en-US", { timeStyle: "short" })}`
                     }
-                </div>
-            </div>
-        </div>
+                </CardFooter>
+            </CardContent>
+        </Card>
     );
 }
 
