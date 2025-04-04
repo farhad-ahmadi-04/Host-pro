@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { formatDistance, parseISO } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export const PAGE_SIZE = 5;
@@ -30,3 +31,10 @@ export const getToday = function (options: { end?: boolean }) {
 
   return today.toISOString();
 };
+
+export const formatDistanceFromNow = (dateStr: string) =>
+  formatDistance(parseISO(dateStr), new Date(), {
+    addSuffix: true,
+  })
+    .replace("about ", "")
+    .replace("in", "In");
