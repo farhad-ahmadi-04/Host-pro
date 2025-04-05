@@ -13,7 +13,7 @@ function TodayActivity() {
             </CardHeader>
             <CardContent className="md:h-72 overflow-auto">
                 {!isLoading
-                    ? activities
+                    ? activities && activities?.length > 0
                         ?
                         <ul className="space-y-10 md:space-y-5 h-full">
                             {activities?.map(activity => <TodayItem activity={activity} key={activity.id} />)}
