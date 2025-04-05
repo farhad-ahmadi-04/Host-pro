@@ -1,103 +1,54 @@
-# Host Pro
+# React + TypeScript + Vite
 
-Host Pro is a modern and efficient web hosting platform designed to offer fast, scalable, and customizable hosting solutions. The application aims to provide a user-friendly interface for users managing their hosting services.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- **Fast and Reliable**: Optimized for performance.
-- **Scalable**: Built to handle increasing demands.
-- **User-Friendly**: Intuitive interface for ease of use.
-- **Customizable**: Adapts to various hosting needs.
-- **Form Handling**: Built with [React Hook Form](https://react-hook-form.com) for efficient form management.
-- **Charts**: Integrated with [Recharts](https://recharts.org) for visualizing data.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Getting Started
+## Expanding the ESLint configuration
 
-### Prerequisites
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Ensure you have the following installed:
-
-- Node.js (version 14 or higher)
-- npm or yarn
-- A modern web browser (e.g., Chrome, Firefox, Edge)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/farhad-ahmadi-04/Host-pro.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Host-pro
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-### Running the Project
-
-1. Start the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-2. Open your browser and go to:
-   ```
-   http://localhost:5173
-   ```
-
-### Building for Production
-
-To create a production build:
-```bash
-npm run build
-# or
-yarn build
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
-The build files will be generated in the `dist` directory.
 
-## Technologies Used
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- React
-- Vite
-- React Query
-- Redux
-- React Hook Form
-- Recharts
-- Node.js
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Contributing
-
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Make your changes and commit them:
-   ```bash
-   git commit -m "Add feature: feature-name"
-   ```
-4. Push your changes:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request.
-
-## License
-
-MIT License.
-
-## Contact
-
-For questions or feedback:
-- GitHub: [farhad-ahmadi-04](https://github.com/farhad-ahmadi-04)
-- Email: farhad.13ahmadi.83l@gmail.com
-
-Happy coding!
-
-Let me know if you need any more adjustments!
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
