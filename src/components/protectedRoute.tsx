@@ -1,6 +1,7 @@
 import useUser from "@/features/authentication/useUser";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SpinnerFullPage from "./ui/spinnerFullPage";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const navigate = useNavigate()
@@ -13,11 +14,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     }, [isAuthenticated, navigate, isLoading])
 
     // 3. while loading, show a spinner
-    if (isLoading) return (
-        <div className="w-dvw h-dvh flex justify-center items-center">
-            <span className="loader"></span>
-        </div>
-    )
+    if (isLoading) return <SpinnerFullPage />
 
     // 4. If there is a user, render the app
     if (isAuthenticated) return children
