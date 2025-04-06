@@ -5,21 +5,24 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { lazy, Suspense } from "react"
 
-import AppLayout from "@/components/ui/appLayout"
-// pages..
-import Dashboard from "@/pages/dashboard"
-import Bookings from "@/pages/bookings"
-import Booking from "@/pages/booking"
-import Checkin from "@/pages/checkin"
-import Cabins from "@/pages/cabins"
-import Users from "@/pages/users"
-import Settings from "@/pages/settings"
-import Account from "@/pages/account"
-import Login from "@/pages/login"
-import PageNotFound from "@/pages/pageNotFound"
 import { Toaster } from "./components/ui/sonner"
+import AppLayout from "@/components/ui/appLayout"
 import ProtectedRoute from "./components/protectedRoute"
+import SpinnerFullPage from "./components/ui/spinnerFullPage"
+
+// pages..
+const Dashboard = lazy(() => import("@/pages/dashboard"))
+const Bookings = lazy(() => import("@/pages/bookings"))
+const Booking = lazy(() => import("@/pages/booking"))
+const Checkin = lazy(() => import("@/pages/checkin"))
+const Cabins = lazy(() => import("@/pages/cabins"))
+const Users = lazy(() => import("@/pages/users"))
+const Settings = lazy(() => import("@/pages/settings"))
+const Account = lazy(() => import("@/pages/account"))
+const Login = lazy(() => import("@/pages/login"))
+const PageNotFound = lazy(() => import("@/pages/pageNotFound"))
 
 // create a new query client
 const queryClient = new QueryClient({
@@ -37,25 +40,27 @@ function App() {
         <ReactQueryDevtools initialIsOpen={true} />
         <Toaster position="top-center" richColors />
         <BrowserRouter>
-          <Routes>
-            <Route element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Navigate replace to={"dashboard"} />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="bookings/:bookingId" element={<Booking />} />
-              <Route path="checkin/:bookingId" element={<Checkin />} />
-              <Route path="cabins" element={<Cabins />} />
-              <Route path="users" element={<Users />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="account" element={<Account />} />
-            </Route>
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Routes>
+              <Route element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<Navigate replace to={"dashboard"} />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="bookings" element={<Bookings />} />
+                <Route path="bookings/:bookingId" element={<Booking />} />
+                <Route path="checkin/:bookingId" element={<Checkin />} />
+                <Route path="cabins" element={<Cabins />} />
+                <Route path="users" element={<Users />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="account" element={<Account />} />
+              </Route>
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </QueryClientProvider>
     </ThemeProvider>
