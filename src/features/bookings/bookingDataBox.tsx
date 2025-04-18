@@ -9,20 +9,18 @@ import { BadgeCheck, BadgeX, Dot, Euro, HouseIcon } from "lucide-react";
 function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
     return (
         <Card className="pt-0">
-            <CardHeader className={`flex justify-between p-4 text-lg ${booking && statusStyle[booking.status]} rounded`}>
-                <div className="flex gap-4 justify-between w-full">
-                    <span className="flex gap-4 items-center">
-                        <HouseIcon />
-                        {booking?.numNights} night(s) in cabin {booking?.cabins.name}
-                    </span>
-                    <span>
-                        {booking && format(new Date(booking.startDate), "EEE, MMM dd yyyy")} (
-                        {booking && isToday(new Date(booking.startDate))
-                            ? "Today"
-                            : booking && formatDistanceFromNow(booking.startDate)}
-                        ) &mdash; {booking && format(new Date(booking.endDate), "EEE, MMM dd yyyy")}
-                    </span>
-                </div>
+            <CardHeader className={`flex flex-col md:flex-row gap-2 md:gap-4 justify-between p-4 text-lg w-full ${booking && statusStyle[booking.status]} rounded`}>
+                <span className="flex gap-4 items-center">
+                    <HouseIcon />
+                    {booking?.numNights} night(s) in cabin {booking?.cabins.name}
+                </span>
+                <span>
+                    {booking && format(new Date(booking.startDate), "EEE, MMM dd yyyy")} (
+                    {booking && isToday(new Date(booking.startDate))
+                        ? "Today"
+                        : booking && formatDistanceFromNow(booking.startDate)}
+                    ) &mdash; {booking && format(new Date(booking.endDate), "EEE, MMM dd yyyy")}
+                </span>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
                 <div className="py-4 space-y-3">
@@ -31,12 +29,12 @@ function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
                         <span>
                             {booking?.guests.fullName} {booking && booking.numGuests > 1 ? `+${booking.numGuests - 1} guests` : ""}
                         </span>
-                        <Dot className="text-stone-500" />
+                        <Dot className="text-stone-500 hidden md:block" />
                         <span className="text-stone-500 italic">
                             {booking?.guests.email}
                         </span>
-                        <Dot className="text-stone-500" />
-                        <span className="text-stone-500 italic">
+                        <Dot className="text-stone-500 hidden md:block" />
+                        <span className="text-stone-500 italic hidden md:block">
                             National ID {booking?.guests.nationalID}
                         </span>
                     </div>
@@ -53,7 +51,7 @@ function BookingDataBox({ booking }: { booking: IBooking | undefined }) {
                                 booking?.extrasPrice
                             )} breakfast )`}
                     </span>
-                    <span>{booking?.isPaid ? <BadgeCheck /> : <BadgeX />}</span>
+                    <span>{booking?.isPaid ? <BadgeCheck className="hidden md:block" /> : <BadgeX className="hidden md:block" />}</span>
                 </div>
                 <CardFooter className="text-sm justify-end">
                     Booked {booking &&
