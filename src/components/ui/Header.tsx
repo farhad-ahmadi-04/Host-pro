@@ -13,11 +13,11 @@ function Header({ children }: { children: React.ReactNode }) {
     const { currentUser } = useUser()
 
     return (
-        <header className="w-full flex justify-between items-center md:p-3 bg-sidebar border-b border-sidebar-border shadow-sm shadow-sidebar">
+        <header className="w-full flex justify-between items-center py-3 md:p-3 bg-sidebar border-b border-sidebar-border shadow-sm shadow-sidebar">
             <div>
                 {children}
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center md:gap-1">
                 <div className="flex items-center gap-2">
                     <AvatarAction />
                     <span>{currentUser?.user_metadata.fullName}</span>
