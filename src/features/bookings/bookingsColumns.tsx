@@ -4,6 +4,7 @@ import { formatCurrency } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import BookingsAction from "./bookingsAction"
 import { IBooking } from "@/types/bookingTypes"
+import { format } from "date-fns"
 
 export const bookingsColumns: ColumnDef<IBooking>[] = [
     {
@@ -66,6 +67,11 @@ export const bookingsColumns: ColumnDef<IBooking>[] = [
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            const date = row.original.created_at
+            return <span>{format(new Date(date), "EEE, MMM dd yyyy")}</span>
+
+        }
     },
     {
         accessorKey: "status",
