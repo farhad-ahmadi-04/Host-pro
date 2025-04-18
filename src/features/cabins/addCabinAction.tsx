@@ -1,15 +1,15 @@
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import CreateCabinForm from "./createCabinForm";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 function AddCabinAction() {
     const [isCreateCabin, setIsCreateCabin] = useState(false);
 
     return (
-        <Dialog open={isCreateCabin}
+        <Sheet open={isCreateCabin}
             onOpenChange={isCreateCabin ? setIsCreateCabin : undefined}>
-            <DialogTrigger className="w-full">
+            <SheetTrigger className="w-full">
                 <Button
                     variant={"secondary"}
                     className="w-full mt-5"
@@ -17,14 +17,16 @@ function AddCabinAction() {
                 >
                     Add cabin
                 </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md max-h-9/12 overflow-y-auto">
-                <DialogTitle>Create cabin</DialogTitle>
-                <DialogDescription>
-                </DialogDescription>
-                <CreateCabinForm onClose={() => setIsCreateCabin?.(false)} />
-            </DialogContent>
-        </Dialog >);
+            </SheetTrigger>
+            <SheetContent className="sm:max-w-lg overflow-y-auto">
+                <SheetHeader>
+                    <SheetTitle>Create cabin</SheetTitle>
+                    <SheetDescription>
+                    </SheetDescription>
+                    <CreateCabinForm onClose={() => setIsCreateCabin?.(false)} />
+                </SheetHeader>
+            </SheetContent>
+        </Sheet >);
 }
 
 export default AddCabinAction;

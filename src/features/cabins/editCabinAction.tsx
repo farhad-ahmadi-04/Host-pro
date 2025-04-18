@@ -1,7 +1,6 @@
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-
 import { Payment } from "./cabinColumns";
 import CreateCabinForm from "./createCabinForm";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 
 function EditCabinAction({
@@ -15,19 +14,21 @@ function EditCabinAction({
     }) {
 
     return (
-        <Dialog open={isEditDialogOpen}
+        <Sheet open={isEditDialogOpen}
             onOpenChange={isEditDialogOpen ?
                 setIsEditDialogOpen : undefined}>
-            <DialogTrigger>
-            </DialogTrigger>
+            <SheetTitle>
+            </SheetTitle>
             {/* content */}
-            <DialogContent className="sm:max-w-md max-h-9/12 overflow-y-auto top-[10%]">
-                <DialogTitle>Edit cabin</DialogTitle>
-                <DialogDescription>
-                </DialogDescription>
-                <CreateCabinForm cabin={cabin} onClose={() => setIsEditDialogOpen?.(false)} />
-            </DialogContent>
-        </Dialog>
+            <SheetContent className="sm:max-w-lg overflow-y-auto">
+                <SheetHeader>
+                    <SheetTitle>Edit cabin</SheetTitle>
+                    <SheetDescription>
+                    </SheetDescription>
+                    <CreateCabinForm cabin={cabin} onClose={() => setIsEditDialogOpen?.(false)} />
+                </SheetHeader>
+            </SheetContent>
+        </Sheet>
     );
 }
 
