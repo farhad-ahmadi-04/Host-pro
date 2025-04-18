@@ -75,7 +75,7 @@ function CheckIn() {
 
             <BookingDataBox booking={booking} />
 
-            <div className="flex flex-col gap-4 mt-3">
+            <div className="flex flex-col gap-4 mt-3 mb-2">
                 {!booking?.hasBreakfast &&
                     <div className="flex items-center gap-4">
                         <Checkbox
@@ -119,7 +119,10 @@ function CheckIn() {
                 {booking &&
                     <>
                         <Button onClick={handleChecking} disabled={!isPaid || isChecking}>Check in booking #{booking.id}</Button>
-                        <Button variant={"outline"} onClick={() => navigate(-1)}>
+                        <Button
+                            variant={"outline"} onClick={() => navigate(-1)}
+                            className="hidden md:inline-block"
+                        >
                             Back
                         </Button>
                     </>

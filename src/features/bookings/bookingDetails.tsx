@@ -58,7 +58,11 @@ function BookingDetails() {
                         <Button variant={"destructive"}
                             onClick={() => setIsDeleteDialogOpen(true)}>
                             Delete Booking</Button>
-                        <Button variant={"outline"} onClick={() => navigate(-1)}>Back</Button>
+                        <Button
+                            variant={"outline"}
+                            onClick={() => navigate(-1)}
+                            className="hidden md:inline-block"
+                        >Back</Button>
 
                         <DeleteBookingAction
                             bookingId={booking?.id}
