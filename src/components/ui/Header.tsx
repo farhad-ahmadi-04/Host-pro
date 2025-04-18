@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "./button";
 import { Github, LogOut, User } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog";
 import useLogout from "@/features/authentication/useLogout";
 import AvatarAction from "../avatarAction";
 import useUser from "@/features/authentication/useUser";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
 
 function Header({ children }: { children: React.ReactNode }) {
     const { isLogout, logout } = useLogout()
@@ -29,32 +29,32 @@ function Header({ children }: { children: React.ReactNode }) {
                     <Button size={"icon"} variant={"ghost"}><User /></Button>
                 </Link>
                 <ModeToggle />
-                <Dialog>
-                    <DialogTrigger asChild>
+                <Sheet>
+                    <SheetTrigger asChild>
                         <Button size={"icon"} variant={"ghost"}><LogOut /></Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                        <DialogHeader>
-                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                            <DialogDescription>
+                    </SheetTrigger>
+                    <SheetContent className="sm:max-w-md" side="top">
+                        <SheetHeader>
+                            <SheetTitle>Are you absolutely sure?</SheetTitle>
+                            <SheetDescription>
                                 This action cannot be undone. This will permanently delete your account
                                 and remove your data from our servers.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter className="sm:justify-start">
-                            <DialogClose asChild>
+                            </SheetDescription>
+                        </SheetHeader>
+                        <SheetFooter className="sm:justify-start">
+                            <SheetClose asChild>
                                 <Button disabled={isLogout}>Cancel</Button>
-                            </DialogClose>
-                            <DialogClose asChild>
+                            </SheetClose>
+                            <SheetClose asChild>
                                 <Button
                                     disabled={isLogout}
                                     variant={"outline"}
                                     onClick={() => logout()}>Logout</Button>
-                            </DialogClose>
+                            </SheetClose>
 
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
+                        </SheetFooter>
+                    </SheetContent>
+                </Sheet>
 
             </div>
         </header>
