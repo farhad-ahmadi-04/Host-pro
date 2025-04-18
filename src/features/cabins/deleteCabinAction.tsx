@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import useDeleteCabin from "./useDeleteCabin";
 import { Payment } from "./cabinColumns";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 
 function DeleteCabinAction({
@@ -16,35 +16,35 @@ function DeleteCabinAction({
     const { deleteCabin, isDeleting } = useDeleteCabin()
 
     return (
-        <Dialog open={isDeleteDialogOpen}
+        <Sheet open={isDeleteDialogOpen}
             onOpenChange={isDeleteDialogOpen ?
                 setIsDeleteDialogOpen : undefined}>
-            <DialogTrigger>
-            </DialogTrigger>
+            <SheetTrigger>
+            </SheetTrigger>
             {/* content */}
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle>Delete cabin</DialogTitle>
-                    <DialogDescription>
+            <SheetContent className="sm:max-w-md" side="top">
+                <SheetHeader>
+                    <SheetTitle>Delete cabin</SheetTitle>
+                    <SheetDescription>
                         Are you sure you want to delete this cabin permanently? This action cannot be undone.
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
+                    </SheetDescription>
+                </SheetHeader>
+                <SheetFooter className="sm:justify-start">
+                    <SheetClose asChild>
                         <Button variant={"outline"}>Cancel</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
+                    </SheetClose>
+                    <SheetClose asChild>
                         <Button
                             disabled={isDeleting}
                             variant={"destructive"}
                             onClick={() => deleteCabin(cabin.id)}>
                             Delete
                         </Button>
-                    </DialogClose>
+                    </SheetClose>
 
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
     );
 }
 
