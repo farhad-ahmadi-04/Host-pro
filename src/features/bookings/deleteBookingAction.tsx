@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import useDeleteBooking from "./useDeleteBooking";
 import { useNavigate } from "react-router-dom";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 function DeleteBookingAction({
     isDeleteDialogOpen,
@@ -16,25 +16,25 @@ function DeleteBookingAction({
     const navigate = useNavigate()
 
     return (
-        <Dialog open={isDeleteDialogOpen}
+        <Sheet open={isDeleteDialogOpen}
             onOpenChange={isDeleteDialogOpen ?
                 setIsDeleteDialogOpen : undefined}>
-            <DialogTrigger>
-            </DialogTrigger>
+            <SheetTrigger>
+            </SheetTrigger>
 
             {/* content */}
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle>Delete booking</DialogTitle>
-                    <DialogDescription>
+            <SheetContent className="sm:max-w-md" side="top">
+                <SheetHeader>
+                    <SheetTitle>Delete booking</SheetTitle>
+                    <SheetDescription>
                         Are you sure you want to delete this booking permanently? This action cannot be undone.
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
+                    </SheetDescription>
+                </SheetHeader>
+                <SheetFooter className="sm:justify-start">
+                    <SheetClose asChild>
                         <Button variant={"outline"}>Cancel</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
+                    </SheetClose>
+                    <SheetClose asChild>
                         <Button
                             disabled={isDeleting}
                             variant={"destructive"}
@@ -44,12 +44,13 @@ function DeleteBookingAction({
                             }}>
                             Delete
                         </Button>
-                    </DialogClose>
+                    </SheetClose>
 
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
     );
 }
+
 
 export default DeleteBookingAction;
